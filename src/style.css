@@ -1,0 +1,48 @@
+@import 'tailwindcss';
+@plugin "../node_modules/daisyui/index.js" {
+  themes: false;
+}
+
+@plugin "daisyui/theme" {
+  name: 'mytheme';
+  default: true; 
+  prefersdark: false; 
+  color-scheme: light;
+
+  --color-base-100: oklch(98% 0.02 240);
+  --color-base-200: oklch(95% 0.03 240);
+  --color-base-300: oklch(92% 0.04 240);
+  --color-base-content: oklch(20% 0.05 240);
+  --color-primary: rgb(87,61,243); /* buttons */
+  --color-primary-content: rgb(254,254,254); /* dashboard background */
+  --color-secondary: rgb(242,234,250); /* buttons' texts */
+  --color-secondary-content: rgb(246,244,254); /* background for current menu item selected */
+  --color-accent: rgb(8,152,94); /* accent green */
+  --color-accent-content: rgb(235,249,238); /* accent green background */
+  --color-neutral: oklch(50% 0.05 240);
+  --color-neutral-content: oklch(98% 0.01 240);
+  --color-info: oklch(70% 0.2 220);
+  --color-info-content: oklch(98% 0.01 220);
+  --color-success: oklch(65% 0.25 140);
+  --color-success-content: oklch(98% 0.01 140);
+  --color-warning: oklch(80% 0.25 80);
+  --color-warning-content: oklch(20% 0.05 80);
+  --color-error: oklch(65% 0.3 30);
+  --color-error-content: oklch(98% 0.01 30);
+
+  /* border radius */
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+
+  /* base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* border size */
+  --border: 1px;
+
+  /* effects */
+  --depth: 1;
+  --noise: 0;
+}
