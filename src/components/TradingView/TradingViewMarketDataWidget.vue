@@ -10,21 +10,21 @@ import { ref, onMounted, watch, onBeforeUnmount } from "vue";
 // Types
 type Theme = "light" | "dark";
 
-interface TabSymbol {
-  s: string;
-  d?: string;
+interface SymbolItem {
+  name: string;
+  displayName?: string;
 }
 
-interface Tab {
-  title: string;
-  symbols: TabSymbol[];
+interface SymbolGroup {
+  name: string;
+  symbols: SymbolItem[];
 }
 
 interface Props {
   theme?: Theme;
   width?: string | number;
   height?: string | number;
-  tabs?: Tab[];
+  groups?: SymbolGroup[];
 }
 
 // Props with defaults
@@ -32,20 +32,20 @@ const props = withDefaults(defineProps<Props>(), {
   theme: "light",
   width: "100%",
   height: "100%",
-  tabs: () => [
+  groups: () => [
     {
-      title: "Indices",
+      name: "Indices",
       symbols: [
-        { s: "FOREXCOM:SPXUSD", d: "S&P 500 Index" },
-        { s: "FOREXCOM:NSXUSD", d: "US 100" },
-        { s: "FOREXCOM:DJI", d: "Dow Jones" },
+        { name: "FOREXCOM:SPXUSD", displayName: "S&P 500" },
+        { name: "FOREXCOM:NSXUSD", displayName: "US 100" },
+        { name: "FOREXCOM:DJI", displayName: "Dow Jones" },
       ],
     },
     {
-      title: "Forex",
+      name: "Forex",
       symbols: [
-        { s: "FX:EURUSD", d: "EUR/USD" },
-        { s: "FX:GBPUSD", d: "GBP/USD" },
+        { name: "FX:EURUSD", displayName: "EUR/USD" },
+        { name: "FX:GBPUSD", displayName: "GBP/USD" },
       ],
     },
   ],
@@ -62,39 +62,21 @@ const loadWidget = (): void => {
 
   const script = document.createElement("script");
   script.src =
-    "https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js";
+    "https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js";
   script.type = "text/javascript";
   script.async = true;
 
   script.innerHTML = JSON.stringify({
     colorTheme: props.theme,
-    dateRange: "12M",
     locale: "en",
     largeChartUrl: "",
     isTransparent: false,
-    showFloatingTooltip: false,
-    plotLineColorGrowing: "rgba(99, 102, 241, 1)",
-    plotLineColorFalling: "rgba(99, 102, 241, 1)",
-    gridLineColor: "rgba(0,0,0,0)",
-    scaleFontColor: "#6B7280",
-
-    belowLineFillColorGrowing: "rgba(99, 102, 241, 0.12)",
-    belowLineFillColorFalling: "rgba(99, 102, 241, 0.12)",
-    belowLineFillColorGrowingBottom: "rgba(99, 102, 241, 0)",
-    belowLineFillColorFallingBottom: "rgba(99, 102, 241, 0)",
-
-    symbolActiveColor: "rgba(99, 102, 241, 0.12)",
-
-    tabs: props.tabs,
-
+    showSymbolLogo: true,
+    backgroundColor: "#EEF2FF",
     support_host: "https://www.tradingview.com",
-
-    backgroundColor: "#EEF2FF", // non-white modern UI
     width: props.width,
     height: props.height,
-
-    showSymbolLogo: true,
-    showChart: true,
+    symbolsGroups: props.groups,
   });
 
   container.value.appendChild(script);
@@ -104,7 +86,7 @@ const loadWidget = (): void => {
 onMounted(loadWidget);
 
 watch(
-  () => [props.theme, props.tabs, props.width, props.height] as const,
+  () => [props.theme, props.width, props.height, props.groups] as const,
   loadWidget
 );
 
