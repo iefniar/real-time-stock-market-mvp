@@ -19,7 +19,7 @@
   --color-secondary-content: rgb(246,244,254); /* background for current menu item selected */
   --color-accent: rgb(8,152,94); /* accent green */
   --color-accent-content: rgb(235,249,238); /* accent green background */
-  --color-neutral: oklch(50% 0.05 240);
+  --color-neutral: rgb(236,234,244); /* avatar dropdown menu background when hovering */
   --color-neutral-content: oklch(98% 0.01 240);
   --color-info: oklch(70% 0.2 220);
   --color-info-content: oklch(98% 0.01 220);

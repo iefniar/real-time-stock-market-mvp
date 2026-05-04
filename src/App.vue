@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import Header from '@/components/Layout/Header.vue';
-import Footer from '@/components/Layout/Footer.vue';
+import LayoutMobile from '@/components/Layout/Mobile/LayoutMobile.vue'
+import LayoutDesktop from '@/components/Layout/Desktop/LayoutDesktop.vue'
 </script>
 
 <template>
-  <Header />
-  <router-view></router-view>
-  <Footer />
+  <div class="block sm:hidden">
+    <LayoutMobile />
+  </div>
+  <div class="hidden sm:block">
+    <LayoutDesktop />
+  </div>
 </template>
