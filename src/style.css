@@ -13,21 +13,21 @@
   --color-base-200: oklch(95% 0.03 240);
   --color-base-300: oklch(92% 0.04 240);
   --color-base-content: oklch(20% 0.05 240);
-  --color-primary: rgb(87,61,243); /* buttons */
-  --color-primary-content: rgb(254,254,254); /* dashboard background */
-  --color-secondary: rgb(242,234,250); /* buttons' texts */
-  --color-secondary-content: rgb(246,244,254); /* background for current menu item selected */
-  --color-accent: rgb(8,152,94); /* accent green */
-  --color-accent-content: rgb(235,249,238); /* accent green background */
-  --color-neutral: rgb(236,234,244); /* avatar dropdown menu background when hovering */
+  --color-primary: rgb(40,19,138); /* buttons */
+  --color-primary-content: rgb(3,7,18); /* dashboard background */
+  --color-secondary: rgb(225,226,232); /* buttons' texts */
+  --color-secondary-content: rgb(12,14,24); /* background for secondary */
+  --color-accent: rgb(224,36,142); /* accent purple */
+  --color-accent-content: rgb(35,23,31); /* background for accent purple */
+  --color-neutral: rgb(29,32,42); /* avatar dropdown menu background when hovering */
   --color-neutral-content: oklch(98% 0.01 240);
-  --color-info: oklch(70% 0.2 220);
-  --color-info-content: oklch(98% 0.01 220);
+  --color-info: rgb(8,152,94); /* green */
+  --color-info-content: rgb(235,249,238); /* background for green */
   --color-success: oklch(65% 0.25 140);
   --color-success-content: oklch(98% 0.01 140);
   --color-warning: oklch(80% 0.25 80);
   --color-warning-content: oklch(20% 0.05 80);
-  --color-error: rgb(181,2,11);
+  --color-error: rgb(224,136,242);
   --color-error-content: oklch(98% 0.01 30);
 
   /* border radius */

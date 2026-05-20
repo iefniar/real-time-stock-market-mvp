@@ -12,7 +12,7 @@ const router = createRouter({
     {path: "/log-in", component: LogInPage, name: "logIn"},
     {path: "/:catchAll(.*)", component: NotFoundPage, name: "notFound"},
   ],
-  linkActiveClass: "text-primary bg-secondary-content",
+  linkActiveClass: "text-accent bg-neutral",
 });
 
 export default router;

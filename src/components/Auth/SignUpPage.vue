@@ -1,5 +1,21 @@
 <template>
-  <form @submit.prevent="onSubmit" class="space-y-5 max-w-sm mx-auto">
+  <div class="absolute inset-0 bg-white dark:bg-gray-950">
+    <!-- diagonal pattern -->
+    <div
+      class="absolute inset-0 opacity-[0.07] dark:opacity-[0.05]"
+      :style="patternStyle"
+    ></div>
+
+    <!-- gradient overlay -->
+    <div
+      class="absolute inset-0 bg-linear-to-br from-white via-white/0 to-white dark:from-gray-950 dark:via-gray-950/0 dark:to-gray-950"
+    ></div>
+  </div>
+
+  <form
+    @submit.prevent="onSubmit"
+    class="space-y-5 max-w-sm mx-auto flex flex-col z-10"
+  >
     <!-- Full Name -->
     <div>
       <input
@@ -42,7 +58,10 @@
     </div>
     <!-- Investment Goals -->
     <div>
-      <select v-model="investmentGoals" class="select bg-secondary-content w-full focus-within:outline-0 focus-within:border-primary">
+      <select
+        v-model="investmentGoals"
+        class="select bg-secondary-content w-full focus-within:outline-0 focus-within:border-primary"
+      >
         <option disabled value="">Investment Goals</option>
         <option
           v-for="option in INVESTMENT_GOALS"
@@ -56,7 +75,10 @@
     </div>
     <!-- Risk Tolerance -->
     <div>
-      <select v-model="riskTolerance" class="select bg-secondary-content w-full focus-within:outline-0 focus-within:border-primary">
+      <select
+        v-model="riskTolerance"
+        class="select bg-secondary-content w-full focus-within:outline-0 focus-within:border-primary"
+      >
         <option disabled value="">Risk Tolerance</option>
         <option
           v-for="option in RISK_TOLERANCE_OPTIONS"
@@ -70,7 +92,10 @@
     </div>
     <!-- Preferred Industry -->
     <div>
-        <select v-model="preferredIndustry" class="select bg-secondary-content w-full focus-within:outline-0 focus-within:border-primary">
+      <select
+        v-model="preferredIndustry"
+        class="select bg-secondary-content w-full focus-within:outline-0 focus-within:border-primary"
+      >
         <option disabled value="">Preferred Industry</option>
         <option
           v-for="option in PREFERRED_INDUSTRIES"
@@ -83,9 +108,9 @@
       <p class="text-error text-sm">{{ errors.preferredIndustry }}</p>
     </div>
     <!-- Submit -->
-    <button class="btn btn-primary w-full" :disabled="isSubmitting">
-      <span v-if="!isSubmitting">Create Account</span>
-      <span v-else class="flex items-center justify-center gap-2">
+    <button class="btn bg-primary w-full" :disabled="isSubmitting">
+      <span v-if="!isSubmitting" class="text-accent">Create Account</span>
+      <span v-else class="flex items-center justify-center gap-2 text-accent">
         <span class="loading loading-spinner loading-sm"></span>
         Creating...
       </span>
@@ -94,6 +119,27 @@
 </template>
 
 <script setup lang="ts">
+const patternStyle = {
+  backgroundImage: `
+    repeating-linear-gradient(
+      -45deg,
+      #3b82f6 0px,
+      #3b82f6 1px,
+      transparent 1px,
+      transparent 10px,
+      #8b5cf6 10px,
+      #8b5cf6 11px,
+      transparent 11px,
+      transparent 20px,
+      #ec4899 20px,
+      #ec4899 21px,
+      transparent 21px,
+      transparent 30px
+    )
+  `,
+  backgroundSize: '42.4px 42.4px'
+}
+
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
