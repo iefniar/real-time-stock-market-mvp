@@ -30,10 +30,10 @@ import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
     </div>
   </div>
   <div class="fixed bottom-0 w-full bg-primary-content px-4 pb-8 z-20">
-    <ul class="flex w-full justify-between pt-4 border-t border-t-neutral">
+    <ul class="flex w-full justify-between pt-4 border-t border-t-neutral text-primary">
       <li>
         <router-link
-          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl text-primary"
+          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-secondary-content"
           :to="{ name: 'home' }"
         >
           <HomeIcon class="size-5" />
@@ -42,7 +42,7 @@ import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
       </li>
       <li>
         <router-link
-          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl text-primary"
+          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-secondary-content"
           to="/markets"
         >
           <ChartBarIcon class="size-5" />
@@ -51,7 +51,7 @@ import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
       </li>
       <li>
         <router-link
-          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl text-primary"
+          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-secondary-content"
           to="/watchlist"
         >
           <StarIcon class="size-5" />
@@ -60,7 +60,7 @@ import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
       </li>
       <li>
         <router-link
-          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl text-primary"
+          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-secondary-content"
           to="/alerts"
         >
           <BellIcon class="size-5" />
@@ -69,7 +69,7 @@ import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
       </li>
       <li>
         <router-link
-          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl text-primary"
+          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-secondary-content"
           to="/settings"
         >
           <Cog6ToothIcon class="size-5" />

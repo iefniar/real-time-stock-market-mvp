@@ -17,7 +17,7 @@
   --color-primary-content: rgb(3,7,18); /* dashboard background */
   --color-secondary: rgb(225,226,232); /* buttons' texts */
   --color-secondary-content: rgb(12,14,24); /* background for secondary */
-  --color-accent: rgb(224,36,142); /* accent purple */
+  --color-accent: rgb(238,13,223); /* accent purple */
   --color-accent-content: rgb(35,23,31); /* background for accent purple */
   --color-neutral: rgb(29,32,42); /* avatar dropdown menu background when hovering */
   --color-neutral-content: oklch(98% 0.01 240);
@@ -27,7 +27,7 @@
   --color-success-content: oklch(98% 0.01 140);
   --color-warning: oklch(80% 0.25 80);
   --color-warning-content: oklch(20% 0.05 80);
-  --color-error: rgb(224,136,242);
+  --color-error: rgb(205,31,97); /* color for error text on form fields */
   --color-error-content: oklch(98% 0.01 30);
 
   /* border radius */

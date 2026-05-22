@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute inset-0 bg-white dark:bg-gray-950">
+  <div class="absolute inset-0 bg-primary-content dark:bg-gray-950">
     <!-- diagonal pattern -->
     <div
       class="absolute inset-0 opacity-[0.07] dark:opacity-[0.05]"
@@ -8,7 +8,7 @@
 
     <!-- gradient overlay -->
     <div
-      class="absolute inset-0 bg-linear-to-br from-white via-white/0 to-white dark:from-gray-950 dark:via-gray-950/0 dark:to-gray-950"
+      class="absolute inset-0 bg-linear-to-br from-primary-content via-white/0 to-bg-gray-950 dark:from-gray-950 dark:via-gray-950/0 dark:to-gray-950"
     ></div>
   </div>
 
@@ -22,7 +22,7 @@
         v-model="fullName"
         type="text"
         placeholder="Full Name"
-        class="input bg-secondary-content w-full focus-within:outline-0 focus-within:border-primary"
+        class="input bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
       />
       <p class="text-error text-sm">{{ errors.fullName }}</p>
     </div>
@@ -32,7 +32,7 @@
         v-model="email"
         type="email"
         placeholder="Email"
-        class="input bg-secondary-content w-full focus-within:outline-0 focus-within:border-primary"
+        class="input bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
       />
       <p class="text-error text-sm">{{ errors.email }}</p>
     </div>
@@ -42,7 +42,7 @@
         v-model="password"
         type="password"
         placeholder="Password"
-        class="input bg-secondary-content w-full focus-within:outline-0 focus-within:border-primary"
+        class="input bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
       />
       <p class="text-error text-sm">{{ errors.password }}</p>
     </div>
@@ -52,7 +52,7 @@
         v-model="country"
         type="text"
         placeholder="Country"
-        class="input bg-secondary-content w-full focus-within:outline-0 focus-within:border-primary"
+        class="input bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
       />
       <p class="text-error text-sm">{{ errors.country }}</p>
     </div>
@@ -60,7 +60,7 @@
     <div>
       <select
         v-model="investmentGoals"
-        class="select bg-secondary-content w-full focus-within:outline-0 focus-within:border-primary"
+        class="select text-primary w-full focus-within:outline-0 focus-within:border-primary"
       >
         <option disabled value="">Investment Goals</option>
         <option
@@ -77,7 +77,7 @@
     <div>
       <select
         v-model="riskTolerance"
-        class="select bg-secondary-content w-full focus-within:outline-0 focus-within:border-primary"
+        class="select text-primary w-full focus-within:outline-0 focus-within:border-primary"
       >
         <option disabled value="">Risk Tolerance</option>
         <option
@@ -94,7 +94,7 @@
     <div>
       <select
         v-model="preferredIndustry"
-        class="select bg-secondary-content w-full focus-within:outline-0 focus-within:border-primary"
+        class="select text-primary w-full focus-within:outline-0 focus-within:border-primary"
       >
         <option disabled value="">Preferred Industry</option>
         <option
@@ -108,7 +108,7 @@
       <p class="text-error text-sm">{{ errors.preferredIndustry }}</p>
     </div>
     <!-- Submit -->
-    <button class="btn bg-primary w-full" :disabled="isSubmitting">
+    <button class="btn bg-primary w-full shadow-none border-none transition duration-300 ease-in-out z-10 hover:brightness-125" :disabled="isSubmitting">
       <span v-if="!isSubmitting" class="text-accent">Create Account</span>
       <span v-else class="flex items-center justify-center gap-2 text-accent">
         <span class="loading loading-spinner loading-sm"></span>
@@ -123,18 +123,21 @@ const patternStyle = {
   backgroundImage: `
     repeating-linear-gradient(
       -45deg,
+
       #3b82f6 0px,
       #3b82f6 1px,
-      transparent 1px,
-      transparent 10px,
+      rgba(59,130,246,0) 1px,
+      rgba(59,130,246,0) 10px,
+
       #8b5cf6 10px,
       #8b5cf6 11px,
-      transparent 11px,
-      transparent 20px,
+      rgba(139,92,246,0) 11px,
+      rgba(139,92,246,0) 20px,
+
       #ec4899 20px,
       #ec4899 21px,
-      transparent 21px,
-      transparent 30px
+      rgba(236,72,153,0) 21px,
+      rgba(236,72,153,0) 30px
     )
   `,
   backgroundSize: '42.4px 42.4px'
@@ -205,3 +208,10 @@ const onSubmit = handleSubmit(async values => {
   }
 })
 </script>
+
+<style setup>
+select {
+  background: var(--color-secondary-content);
+}
+
+</style>
