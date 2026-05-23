@@ -20,7 +20,7 @@ interface Props {
 
 // Props with defaults
 const props = withDefaults(defineProps<Props>(), {
-  theme: "light",
+  theme: "dark",
   dataSource: "SPX500",
   width: "100%",
   height: "100%",
@@ -60,6 +60,7 @@ const loadWidget = (): void => {
   });
 
   container.value.appendChild(script);
+
 };
 
 // lifecycle

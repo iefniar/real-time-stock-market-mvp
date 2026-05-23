@@ -29,7 +29,7 @@ interface Props {
 
 // Props with defaults
 const props = withDefaults(defineProps<Props>(), {
-  theme: "light",
+  theme: "dark",
   width: "100%",
   height: "100%",
   tabs: () => [
@@ -71,7 +71,7 @@ const loadWidget = (): void => {
     dateRange: "12M",
     locale: "en",
     largeChartUrl: "",
-    isTransparent: false,
+    isTransparent: true, // to remove the background color
     showFloatingTooltip: false,
     plotLineColorGrowing: "rgba(99, 102, 241, 1)",
     plotLineColorFalling: "rgba(99, 102, 241, 1)",
@@ -89,7 +89,7 @@ const loadWidget = (): void => {
 
     support_host: "https://www.tradingview.com",
 
-    backgroundColor: "#EEF2FF", // non-white modern UI
+    backgroundColor: "rgb(3,7,18)", // not working
     width: props.width,
     height: props.height,
 

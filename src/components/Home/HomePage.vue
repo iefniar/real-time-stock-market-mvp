@@ -19,7 +19,7 @@ import TradingViewMarketDataWidget from '@/components/TradingView/TradingViewMar
     <TradingViewStockHeatmapWidget />
   </div>
 
-  <div class="h-100 sm:h-200">
+  <div class="h-100 sm:h-200 border border-neutral">
     <TradingViewMarketOverviewWidget />
   </div>
 
@@ -35,6 +35,6 @@ import TradingViewMarketDataWidget from '@/components/TradingView/TradingViewMar
 
   <!-- Crypto example -->
   <div class="h-50 sm:h-100">
-    <TradingViewChartWidget symbol="BINANCE:BTCUSDT" theme="light" />
+    <TradingViewChartWidget symbol="BINANCE:BTCUSDT" theme="dark" />
   </div>
 </template>

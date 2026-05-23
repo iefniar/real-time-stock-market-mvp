@@ -20,7 +20,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   symbol: "NASDAQ:AAPL",
   interval: "D",
-  theme: "light",
+  theme: "dark",
   timezone: "Etc/UTC",
 });
 
@@ -49,7 +49,7 @@ const loadWidget = (): void => {
     hide_legend: false,
     hide_volume: false,
     autosize: true,
-    backgroundColor: "#EEF2FF",
+    backgroundColor: "rgb(3,7,18)",
     gridColor: "rgba(99, 102, 241, 0.1)",
   });
 

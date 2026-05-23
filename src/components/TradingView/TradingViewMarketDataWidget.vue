@@ -29,7 +29,7 @@ interface Props {
 
 // Props with defaults
 const props = withDefaults(defineProps<Props>(), {
-  theme: "light",
+  theme: "dark",
   width: "100%",
   height: "100%",
   groups: () => [
@@ -72,7 +72,7 @@ const loadWidget = (): void => {
     largeChartUrl: "",
     isTransparent: false,
     showSymbolLogo: true,
-    backgroundColor: "#EEF2FF",
+    backgroundColor: "rgb(3,7,18)",
     support_host: "https://www.tradingview.com",
     width: props.width,
     height: props.height,
