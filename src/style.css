@@ -46,3 +46,9 @@
   --depth: 1;
   --noise: 0;
 }
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-neutral);
+}

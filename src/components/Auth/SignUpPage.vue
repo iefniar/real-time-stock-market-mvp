@@ -14,7 +14,7 @@
 
   <form
     @submit.prevent="onSubmit"
-    class="space-y-5 max-w-sm mx-auto flex flex-col z-10"
+    class="relative space-y-5 max-w-sm mx-auto flex flex-col z-10"
   >
     <!-- Full Name -->
     <div>
