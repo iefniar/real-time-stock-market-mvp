@@ -3,6 +3,7 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 import router from './router';
+import '@vueform/multiselect/themes/default.css';
 import './style.css';
 
 const app = createApp(App);

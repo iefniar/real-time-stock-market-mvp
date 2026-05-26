@@ -107,6 +107,8 @@
       </select>
       <p class="text-error text-sm">{{ errors.preferredIndustry }}</p>
     </div>
+
+    <Multiselect class="multiselect-class" />
     <!-- Submit -->
     <button class="btn bg-primary w-full shadow-none border-none transition duration-300 ease-in-out z-10 hover:brightness-125" :disabled="isSubmitting">
       <span v-if="!isSubmitting" class="text-accent">Create Account</span>
@@ -152,6 +154,7 @@ import {
   PREFERRED_INDUSTRIES,
   type SignUpFormData
 } from '@/types/forms'
+import Multiselect from '../Form/Multiselect.vue'
 
 // Schema
 const schema = toTypedSchema(
@@ -211,7 +214,7 @@ const onSubmit = handleSubmit(async values => {
 
 <style setup>
 select {
-  background: var(--color-secondary-content);
+  background-color: var(--color-secondary-content);
 }
 
 </style>
