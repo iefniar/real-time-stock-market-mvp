@@ -34,3 +34,8 @@ export const PREFERRED_INDUSTRIES: Option[] = [
   { value: 'Energy', label: 'Energy' },
   { value: 'Consumer Goods', label: 'Consumer Goods' }
 ]
+
+export type LogInFormData = {
+  email: string
+  password: string
+}

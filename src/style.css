@@ -15,7 +15,7 @@
   --color-base-content: oklch(20% 0.05 240);
   --color-primary: rgb(40,19,138); /* buttons */
   --color-primary-content: rgb(3,7,18); /* dashboard background */
-  --color-secondary: rgb(225,226,232); /* buttons' texts */
+  --color-secondary: rgb(194,197,209); /* buttons' texts */
   --color-secondary-content: rgb(12,14,24); /* background for secondary */
   --color-accent: rgb(238,13,223); /* accent purple */
   --color-accent-content: rgb(35,23,31); /* background for accent purple */

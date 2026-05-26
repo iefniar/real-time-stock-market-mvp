@@ -16,15 +16,19 @@
     @submit.prevent="onSubmit"
     class="relative space-y-5 max-w-sm mx-auto flex flex-col z-10"
   >
+    <div class="flex flex-col items-center">
+      <UserCircleIcon class="size-20 text-primary drop-shadow-lg/50 drop-shadow-primary" />
+      <h1 class="font-light text-secondary">Sign Up</h1>
+    </div>
     <!-- Full Name -->
     <div>
       <input
         v-model="fullName"
         type="text"
         placeholder="Full Name"
-        class="input bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
+        class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
       />
-      <p class="text-error text-sm">{{ errors.fullName }}</p>
+      <p class="text-error text-sm pt-1">{{ errors.fullName }}</p>
     </div>
     <!-- Email -->
     <div>
@@ -32,9 +36,9 @@
         v-model="email"
         type="email"
         placeholder="Email"
-        class="input bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
+        class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
       />
-      <p class="text-error text-sm">{{ errors.email }}</p>
+      <p class="text-error text-sm pt-1">{{ errors.email }}</p>
     </div>
     <!-- Password -->
     <div>
@@ -42,14 +46,14 @@
         v-model="password"
         type="password"
         placeholder="Password"
-        class="input bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
+        class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
       />
-      <p class="text-error text-sm">{{ errors.password }}</p>
+      <p class="text-error text-sm pt-1">{{ errors.password }}</p>
     </div>
     <!-- Country -->
     <div>
       <Multiselect v-model="country" />
-      <p class="text-error text-sm">
+      <p class="text-error text-sm pt-1">
         {{ errors.country }}
       </p>
     </div>
@@ -57,7 +61,7 @@
     <div>
       <select
         v-model="investmentGoals"
-        class="select text-primary w-full focus-within:outline-0 focus-within:border-primary"
+        class="select shadow-none text-primary w-full focus-within:outline-0 focus-within:border-primary"
       >
         <option disabled value="">Investment Goals</option>
         <option
@@ -68,13 +72,13 @@
           {{ option.label }}
         </option>
       </select>
-      <p class="text-error text-sm">{{ errors.investmentGoals }}</p>
+      <p class="text-error text-sm pt-1">{{ errors.investmentGoals }}</p>
     </div>
     <!-- Risk Tolerance -->
     <div>
       <select
         v-model="riskTolerance"
-        class="select text-primary w-full focus-within:outline-0 focus-within:border-primary"
+        class="select shadow-none text-primary w-full focus-within:outline-0 focus-within:border-primary"
       >
         <option disabled value="">Risk Tolerance</option>
         <option
@@ -85,13 +89,13 @@
           {{ option.label }}
         </option>
       </select>
-      <p class="text-error text-sm">{{ errors.riskTolerance }}</p>
+      <p class="text-error text-sm pt-1">{{ errors.riskTolerance }}</p>
     </div>
     <!-- Preferred Industry -->
     <div>
       <select
         v-model="preferredIndustry"
-        class="select text-primary w-full focus-within:outline-0 focus-within:border-primary"
+        class="select shadow-none text-primary w-full focus-within:outline-0 focus-within:border-primary"
       >
         <option disabled value="">Preferred Industry</option>
         <option
@@ -102,19 +106,35 @@
           {{ option.label }}
         </option>
       </select>
-      <p class="text-error text-sm">{{ errors.preferredIndustry }}</p>
+      <p class="text-error text-sm pt-1">{{ errors.preferredIndustry }}</p>
     </div>
     <!-- Submit -->
     <button
-      class="btn bg-primary w-full shadow-none border-none transition duration-300 ease-in-out z-10 hover:brightness-125"
+      class="btn bg-primary w-full shadow-none border-none drop-shadow-lg/50 drop-shadow-primary transition duration-300 ease-in-out z-10 hover:brightness-125"
       :disabled="isSubmitting"
     >
-      <span v-if="!isSubmitting" class="text-accent">Create Account</span>
-      <span v-else class="flex items-center justify-center gap-2 text-accent">
+      <span v-if="!isSubmitting" class="text-accent font-normal"
+        >Create Account</span
+      >
+      <span
+        v-else
+        class="flex items-center justify-center gap-2 text-accent font-normal"
+      >
         <span class="loading loading-spinner loading-sm"></span>
         Creating...
       </span>
     </button>
+    <div class="flex flex-col items-center pt-4">
+      <p class="text-sm text-secondary font-light flex gap-2 items-center">
+        Already have an account?
+        <router-link
+          class="text-accent transition delay-150 duration-300 ease-in-out hover:text-primary"
+          :to="{ name: 'logIn' }"
+        >
+          Log In
+        </router-link>
+      </p>
+    </div>
   </form>
 </template>
 
@@ -153,6 +173,7 @@ import {
   type SignUpFormData
 } from '@/types/forms'
 import Multiselect from '../Form/Multiselect.vue'
+import { UserCircleIcon } from '@heroicons/vue/24/solid'
 
 // Schema
 const schema = toTypedSchema(
@@ -212,6 +233,6 @@ const onSubmit = handleSubmit(async values => {
 
 <style scoped>
 select {
-  background-color: var(--color-secondary-content);
+  background: var(--color-secondary-content);
 }
 </style>

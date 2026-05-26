@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { HomeIcon } from '@heroicons/vue/24/outline'
-import { ChartBarIcon } from '@heroicons/vue/24/outline'
-import { StarIcon } from '@heroicons/vue/24/outline'
-import { BellIcon } from '@heroicons/vue/24/outline'
-import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
+import { HomeIcon } from '@heroicons/vue/24/solid'
+import { ChartBarIcon } from '@heroicons/vue/24/solid'
+import { StarIcon } from '@heroicons/vue/24/solid'
+import { BellIcon } from '@heroicons/vue/24/solid'
+import { Cog6ToothIcon } from '@heroicons/vue/24/solid'
 </script>
 
 <template>
   <div class="px-2 py-6 z-20">
     <div class="flex gap-2 mb-3 px-2 pb-3">
       <img src="@/assets/avatar.png" alt="logo" class="w-5 h-5" />
-      <div class="text-primary font-semibold"><span class="text-secondary">RealTime</span>Market</div>
+      <div class="text-primary"><span class="text-secondary">RealTime</span>Market</div>
     </div>
     <ul class="flex flex-col gap-y-3 text-primary">
       <li>

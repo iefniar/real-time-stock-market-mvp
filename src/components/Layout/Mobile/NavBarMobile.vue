@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { HomeIcon } from '@heroicons/vue/24/outline'
-import { ChartBarIcon } from '@heroicons/vue/24/outline'
-import { StarIcon } from '@heroicons/vue/24/outline'
-import { BellIcon } from '@heroicons/vue/24/outline'
-import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
+import { HomeIcon } from '@heroicons/vue/24/solid'
+import { ChartBarIcon } from '@heroicons/vue/24/solid'
+import { StarIcon } from '@heroicons/vue/24/solid'
+import { BellIcon } from '@heroicons/vue/24/solid'
+import { Cog6ToothIcon } from '@heroicons/vue/24/solid'
 </script>
 
 <template>
@@ -11,7 +11,7 @@ import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
     <div class="flex mb-2 justify-between items-center">
       <div class="flex gap-2">
         <img src="@/assets/avatar.png" alt="logo" class="w-5 h-5" />
-        <div class="text-primary font-semibold">
+        <div class="text-primary">
           <span class="text-secondary">RealTime</span>Market
         </div>
       </div>
