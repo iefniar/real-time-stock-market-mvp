@@ -1,14 +1,22 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import Multiselect from '@vueform/multiselect'
 import countries from 'world-countries'
 
-const selectedCountry = ref('')
+interface Props {
+  modelValue: string
+}
+
+const props = defineProps<Props>()
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string): void
+}>()
 
 const countryOptions = computed(() =>
   countries
     .map(country => ({
-      value: country.cca2,
+      value: country.name.common,
       label: country.name.common
     }))
     .sort((a, b) => a.label.localeCompare(b.label))
@@ -17,7 +25,8 @@ const countryOptions = computed(() =>
 
 <template>
   <Multiselect
-    v-model="selectedCountry"
+    :model-value="props.modelValue"
+    @update:model-value="emit('update:modelValue', $event ?? '')"
     :options="countryOptions"
     placeholder="Select country"
     :searchable="true"
@@ -30,8 +39,8 @@ const countryOptions = computed(() =>
 <style>
 .multiselect-class {
   color: var(--color-primary);
-  font-size: .9rem;
-  --ms-option-font-size: .9rem;
+  --ms-font-size: 0.9rem;
+  --ms-option-font-size: 0.9rem;
   --ms-bg: var(--color-secondary-content);
   --ms-border-color: var(--color-secondary-content);
   --ms-ring-width: 0;
@@ -57,13 +66,12 @@ const countryOptions = computed(() =>
 }
 
 .multiselect-dropdown {
-  padding-block: .3rem;
+  padding-block: 0.3rem;
   --ms-max-height: 158px;
 }
 
 .multiselect-option {
   border-radius: 4px;
-  margin: .1rem .3rem;
+  margin: 0.1rem 0.3rem;
 }
-
 </style>

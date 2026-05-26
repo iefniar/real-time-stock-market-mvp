@@ -48,13 +48,10 @@
     </div>
     <!-- Country -->
     <div>
-      <input
-        v-model="country"
-        type="text"
-        placeholder="Country"
-        class="input bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
-      />
-      <p class="text-error text-sm">{{ errors.country }}</p>
+      <Multiselect v-model="country" />
+      <p class="text-error text-sm">
+        {{ errors.country }}
+      </p>
     </div>
     <!-- Investment Goals -->
     <div>
@@ -106,9 +103,6 @@
         </option>
       </select>
       <p class="text-error text-sm">{{ errors.preferredIndustry }}</p>
-    </div>
-    <div>
-      <Multiselect />
     </div>
     <!-- Submit -->
     <button
@@ -178,7 +172,7 @@ const defaultValues: SignUpFormData = {
   fullName: '',
   email: '',
   password: '',
-  country: 'USA',
+  country: '',
   investmentGoals: '',
   riskTolerance: '',
   preferredIndustry: ''
