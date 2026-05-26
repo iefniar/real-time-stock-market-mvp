@@ -23,11 +23,11 @@ const countryOptions = computed(() =>
     :searchable="true"
     :close-on-select="true"
     :can-clear="false"
-    class="w-full"
+    class="w-full multiselect-class"
   />
 </template>
 
-<style scoped>
+<style>
 .multiselect-class {
   color: var(--color-primary);
   font-size: .9rem;
@@ -44,10 +44,26 @@ const countryOptions = computed(() =>
   --ms-placeholder-color: var(--color-primary);
   --ms-dropdown-bg: var(--color-secondary-content);
   --ms-caret-color: var(--color-primary);
+  --ms-dropdown-border-color: var(--color-primary);
+  --ms-radius: 5px;
 }
 
 .multiselect-class:focus-within {
   --ms-border-color: var(--color-primary);
+}
+
+.multiselect.is-open {
+  border-radius: var(--ms-radius);
+}
+
+.multiselect-dropdown {
+  padding-block: .3rem;
+  --ms-max-height: 158px;
+}
+
+.multiselect-option {
+  border-radius: 4px;
+  margin: .1rem .3rem;
 }
 
 </style>

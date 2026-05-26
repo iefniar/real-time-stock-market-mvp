@@ -107,10 +107,14 @@
       </select>
       <p class="text-error text-sm">{{ errors.preferredIndustry }}</p>
     </div>
-
-    <Multiselect class="multiselect-class" />
+    <div>
+      <Multiselect />
+    </div>
     <!-- Submit -->
-    <button class="btn bg-primary w-full shadow-none border-none transition duration-300 ease-in-out z-10 hover:brightness-125" :disabled="isSubmitting">
+    <button
+      class="btn bg-primary w-full shadow-none border-none transition duration-300 ease-in-out z-10 hover:brightness-125"
+      :disabled="isSubmitting"
+    >
       <span v-if="!isSubmitting" class="text-accent">Create Account</span>
       <span v-else class="flex items-center justify-center gap-2 text-accent">
         <span class="loading loading-spinner loading-sm"></span>
@@ -212,9 +216,8 @@ const onSubmit = handleSubmit(async values => {
 })
 </script>
 
-<style setup>
+<style scoped>
 select {
   background-color: var(--color-secondary-content);
 }
-
 </style>
