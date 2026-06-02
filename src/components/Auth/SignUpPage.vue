@@ -215,20 +215,61 @@ const [riskTolerance] = defineField('riskTolerance')
 const [preferredIndustry] = defineField('preferredIndustry')
 
 // Submit
-const onSubmit = handleSubmit(async values => {
-  try {
-    // simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500))
+const onSubmit = handleSubmit(
+  async ({
+    email,
+    password,
+    fullName,
+    country,
+    investmentGoals,
+    riskTolerance,
+    preferredIndustry,
+  }) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/sign-up`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            email,
+            password,
+            fullName,
+            country,
+            investmentGoals,
+            riskTolerance,
+            preferredIndustry,
+          }),
+        }
+      );
 
-    console.log('Submitted:', values)
+      if (!response.ok) {
+        throw new Error(
+          `Request failed with status ${response.status}`
+        );
+      }
 
-    // reset all fields
-    resetForm()
-    alert('Account created successfully!')
-  } catch (error) {
-    console.error(error)
+      const data = await response.json();
+
+      console.log("Submitted:", data);
+
+      resetForm();
+
+      alert("Account created successfully!");
+    } catch (error) {
+      console.error(error);
+
+      alert(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong"
+      );
+    }
   }
-})
+);
 </script>
 
 <style scoped>
