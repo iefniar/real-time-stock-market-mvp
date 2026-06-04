@@ -28,7 +28,7 @@
   --color-warning: oklch(80% 0.25 80);
   --color-warning-content: oklch(20% 0.05 80);
   --color-error: rgb(205,31,97); /* color for error text on form fields */
-  --color-error-content: oklch(98% 0.01 30);
+  --color-error-content: rgb(4, 1, 20);
 
   /* border radius */
   --radius-selector: 1rem;
@@ -45,6 +45,7 @@
   /* effects */
   --depth: 1;
   --noise: 0;
+
 }
 
 /* Firefox */
