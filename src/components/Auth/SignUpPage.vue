@@ -183,7 +183,7 @@ import {
   RISK_TOLERANCE_OPTIONS,
   PREFERRED_INDUSTRIES,
   type SignUpFormData
-} from '@/types/forms'
+} from '@/types/global.ts'
 import Multiselect from '../Form/Multiselect.vue'
 import { UserCircleIcon } from '@heroicons/vue/24/solid'
 import AlertMessage from '../UI/AlertMessage.vue'

@@ -98,8 +98,12 @@ const patternStyle = {
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
-import { type LogInFormData } from '@/types/forms'
+import { type LogInFormData } from '@/types/global'
 import { UserCircleIcon } from '@heroicons/vue/24/solid'
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 // Schema
 const schema = toTypedSchema(
@@ -126,18 +130,30 @@ const [email] = defineField('email')
 const [password] = defineField('password')
 
 // Submit
-const onSubmit = handleSubmit(async values => {
+const onSubmit = handleSubmit(async ({ email, password }:LogInFormData) => {
   try {
-    // simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500))
+    const result = await authClient.signIn.email({
+      email,
+      password,
+    });
 
-    console.log('Submitted:', values)
+    if (result.error) {
+      throw new Error(result.error.message);
+    }
 
-    // reset all fields
-    resetForm()
-    alert('Logged in successfully!')
+    resetForm();
+
+    router.push({
+      name: "home",
+    });
   } catch (error) {
-    console.error(error)
+    console.error(error);
+
+    alert(
+      error instanceof Error
+        ? error.message
+        : "Failed to log in"
+    );
   }
 })
 </script>
