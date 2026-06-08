@@ -12,62 +12,70 @@
     ></div>
   </div>
 
-  <form
-    @submit.prevent="onSubmit"
-    class="relative space-y-5 max-w-sm mx-auto flex flex-col z-10"
-  >
-    <div class="flex flex-col items-center">
-      <UserCircleIcon
-        class="size-20 text-primary drop-shadow-lg/50 drop-shadow-primary"
-      />
-      <h1 class="font-light text-secondary">Welcome Back</h1>
-    </div>
-    <!-- Email -->
-    <div>
-      <input
-        v-model="email"
-        type="email"
-        placeholder="Email"
-        class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
-      />
-      <p class="text-error text-sm pt-1">{{ errors.email }}</p>
-    </div>
-    <!-- Password -->
-    <div>
-      <input
-        v-model="password"
-        type="password"
-        placeholder="Password"
-        class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
-      />
-      <p class="text-error text-sm pt-1">{{ errors.password }}</p>
-    </div>
-    <!-- Submit -->
-    <button
-      class="btn bg-primary w-full shadow-none border-none drop-shadow-lg/50 drop-shadow-primary transition duration-300 ease-in-out z-10 hover:brightness-125"
-      :disabled="isSubmitting"
+  <div class="relative">
+    <form
+      @submit.prevent="onSubmit"
+      class="relative space-y-5 max-w-sm mx-auto flex flex-col z-10"
     >
-      <span v-if="!isSubmitting" class="text-accent font-normal">Log In</span>
-      <span
-        v-else
-        class="flex items-center justify-center gap-2 text-accent font-normal"
+      <div class="flex flex-col items-center">
+        <UserCircleIcon
+          class="size-20 text-primary drop-shadow-lg/50 drop-shadow-primary"
+        />
+        <h1 class="font-light text-secondary">Welcome Back</h1>
+      </div>
+      <!-- Email -->
+      <div>
+        <input
+          v-model="email"
+          type="email"
+          placeholder="Email"
+          class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
+        />
+        <p class="text-error text-sm pt-1">{{ errors.email }}</p>
+      </div>
+      <!-- Password -->
+      <div>
+        <input
+          v-model="password"
+          type="password"
+          placeholder="Password"
+          class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
+        />
+        <p class="text-error text-sm pt-1">{{ errors.password }}</p>
+      </div>
+      <!-- Submit -->
+      <button
+        class="btn bg-primary w-full shadow-none border-none drop-shadow-lg/50 drop-shadow-primary transition duration-300 ease-in-out z-10 hover:brightness-125"
+        :disabled="isSubmitting"
       >
-        <span class="loading loading-spinner loading-sm"></span>
-        Logging in...
-      </span>
-    </button>
-    <div class="flex flex-col items-center pt-4">
-      <p class="text-sm text-secondary font-light flex gap-2 items-center">
-        Don't have an account?
-        <router-link
-          class="text-accent transition delay-150 duration-300 ease-in-out hover:text-primary"
-          :to="{ name: 'signUp' }"
+        <span v-if="!isSubmitting" class="text-accent font-normal">Log In</span>
+        <span
+          v-else
+          class="flex items-center justify-center gap-2 text-accent font-normal"
         >
-          Sign Up
-        </router-link>
-      </p>
-    </div>
-  </form>
+          <span class="loading loading-spinner loading-sm"></span>
+          Logging in...
+        </span>
+      </button>
+      <div class="flex flex-col items-center pt-4">
+        <p class="text-sm text-secondary font-light flex gap-2 items-center">
+          Don't have an account?
+          <router-link
+            class="text-accent transition delay-150 duration-300 ease-in-out hover:text-primary"
+            :to="{ name: 'signUp' }"
+          >
+            Sign Up
+          </router-link>
+        </p>
+      </div>
+    </form>
+    <AlertMessage
+      v-if="showError"
+      type="error"
+      :message="errorMessage"
+      @close="showError = false"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -95,15 +103,19 @@ const patternStyle = {
   backgroundSize: '42.4px 42.4px'
 }
 
+import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
 import { type LogInFormData } from '@/types/global'
 import { UserCircleIcon } from '@heroicons/vue/24/solid'
-import { authClient } from "@/lib/auth-client";
-import { useRouter } from "vue-router";
+import { authClient } from '@/lib/auth-client'
+import { useRouter } from 'vue-router'
+import AlertMessage from '../UI/AlertMessage.vue'
 
-const router = useRouter();
+const router = useRouter()
+const showError = ref(false)
+const errorMessage = ref('')
 
 // Schema
 const schema = toTypedSchema(
@@ -130,30 +142,26 @@ const [email] = defineField('email')
 const [password] = defineField('password')
 
 // Submit
-const onSubmit = handleSubmit(async ({ email, password }:LogInFormData) => {
+const onSubmit = handleSubmit(async ({ email, password }: LogInFormData) => {
   try {
     const result = await authClient.signIn.email({
       email,
-      password,
-    });
+      password
+    })
 
     if (result.error) {
-      throw new Error(result.error.message);
+      throw new Error(result.error.message)
     }
 
-    resetForm();
+    resetForm()
 
     router.push({
-      name: "home",
-    });
+      name: 'home'
+    })
   } catch (error) {
-    console.error(error);
-
-    alert(
-      error instanceof Error
-        ? error.message
-        : "Failed to log in"
-    );
+    errorMessage.value =
+      error instanceof Error ? error.message : 'Failed to log in'
+    showError.value = true
   }
 })
 </script>
