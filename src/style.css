@@ -20,7 +20,7 @@
   --color-accent: rgb(238,13,223); /* accent purple */
   --color-accent-content: rgb(35,23,31); /* background for accent purple */
   --color-neutral: rgb(29,32,42); /* avatar dropdown menu background when hovering */
-  --color-neutral-content: oklch(98% 0.01 240);
+  --color-neutral-content: rgb(69, 69, 69);
   --color-info: rgb(8,152,94); /* green */
   --color-info-content: rgb(235,249,238); /* background for green */
   --color-success: oklch(65% 0.25 140);

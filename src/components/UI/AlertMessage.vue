@@ -2,7 +2,7 @@
   <div class="alert-container">
     <div
       role="alert"
-      :class="`alert alert-${type} alert-vertical sm:alert-horizontal`"
+      :class="`alert alert-${type} alert-vertical sm:alert-horizontal drop-shadow-xl/50 drop-shadow-${type}`"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -91,6 +91,7 @@ const iconPath = computed(() => {
 .alert-error {
   background-color: var(--color-error-content);
   color: var(--color-error);
+
 }
 
 .alert-success {
