@@ -18,10 +18,12 @@
       class="relative space-y-5 max-w-sm mx-auto flex flex-col z-10"
     >
       <div class="flex flex-col items-center">
-        <UserCircleIcon
-          class="size-20 text-primary drop-shadow-lg/50 drop-shadow-primary"
+        <img
+          src="@/assets/soul-penguin-no-bg.png"
+          alt="login image"
+          class="w-48 h-48 object-cover hover:drop-shadow-lg/50 drop-shadow-secondary transition delay-50 duration-300 ease-in-out"
         />
-        <h1 class="font-light text-secondary">Sign Up</h1>
+        <h1 class="font-light text-secondary text-2xl young-serif-regular">Sign Up</h1>
       </div>
       <!-- Full Name -->
       <div>
@@ -185,7 +187,6 @@ import {
   type SignUpFormData
 } from '@/types/global.ts'
 import Multiselect from '../Form/Multiselect.vue'
-import { UserCircleIcon } from '@heroicons/vue/24/solid'
 import AlertMessage from '../UI/AlertMessage.vue'
 
 const router = useRouter()

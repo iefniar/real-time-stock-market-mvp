@@ -18,10 +18,14 @@
       class="relative space-y-5 max-w-sm mx-auto flex flex-col z-10"
     >
       <div class="flex flex-col items-center">
-        <UserCircleIcon
-          class="size-20 text-primary drop-shadow-lg/50 drop-shadow-primary"
+        <img
+          src="@/assets/soul-toucan-no-bg.png"
+          alt="login image"
+          class="w-64 h-64 object-cover hover:drop-shadow-lg/50 drop-shadow-primary transition delay-50 duration-300 ease-in-out"
         />
-        <h1 class="font-light text-secondary">Welcome Back</h1>
+        <h1 class="font-light text-secondary text-2xl young-serif-regular">
+          Welcome Back
+        </h1>
       </div>
       <!-- Email -->
       <div>
@@ -108,7 +112,6 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
 import { type LogInFormData } from '@/types/global'
-import { UserCircleIcon } from '@heroicons/vue/24/solid'
 import { authClient } from '@/lib/auth-client'
 import { useRouter } from 'vue-router'
 import AlertMessage from '../UI/AlertMessage.vue'
