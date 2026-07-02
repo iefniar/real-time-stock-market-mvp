@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { HomeIcon } from '@heroicons/vue/24/solid'
-import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { StarIcon } from '@heroicons/vue/24/solid'
 import { authClient } from '@/lib/auth-client'
 import { useRouter } from 'vue-router'
 import AlertMessage from '../../UI/AlertMessage.vue'
+import SearchCommand from '@/components/UI/SearchCommand.vue'
 import { type User } from '@/types/global'
 
 const router = useRouter()
@@ -104,16 +104,7 @@ const handleLogOut = async () => {
         </router-link>
       </li>
       <li class="flex-1">
-        <div
-          class="flex items-center justify-between gap-1 py-4 px-3 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-secondary-content"
-        >
-          <input
-            type="text"
-            placeholder="Search"
-            class="w-full max-w-9/10 focus:outline-none"
-          />
-          <MagnifyingGlassIcon class="size-6" />
-        </div>
+        <SearchCommand :label="'Search'" />
       </li>
       <li class="flex-1">
         <router-link

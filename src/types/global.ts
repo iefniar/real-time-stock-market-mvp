@@ -41,7 +41,18 @@ export type LogInFormData = {
 }
 
 export type User = {
-  id: string;
-  name: string;
-  email: string;
-};
+  id: string
+  name: string
+  email: string
+}
+
+export type Stock = {
+  symbol: string
+  name: string
+  exchange: string
+  type: string
+}
+
+export type StockWithWatchlistStatus = Stock & {
+  isInWatchlist: boolean
+}

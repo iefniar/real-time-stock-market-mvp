@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { HomeIcon } from '@heroicons/vue/24/solid'
 import { StarIcon } from '@heroicons/vue/24/solid'
-import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
+import SearchCommand from '@/components/UI/SearchCommand.vue'
 </script>
 
 <template>
@@ -14,16 +14,7 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
     </div>
     <ul class="flex flex-col gap-y-3 text-primary">
       <li>
-        <div
-          class="flex items-center justify-between gap-2 py-1 px-2 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-secondary-content"
-        >
-          <input
-            type="text"
-            placeholder="Search"
-            class="w-full max-w-9/10 focus:outline-none"
-          />
-          <MagnifyingGlassIcon class="size-5" />
-        </div>
+        <SearchCommand />
       </li>
       <li>
         <router-link
