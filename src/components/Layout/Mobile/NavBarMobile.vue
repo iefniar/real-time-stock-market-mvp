@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import { HomeIcon } from '@heroicons/vue/24/solid'
 import { StarIcon } from '@heroicons/vue/24/solid'
+import { Cog8ToothIcon } from '@heroicons/vue/24/solid'
+import { ArrowRightStartOnRectangleIcon } from '@heroicons/vue/24/solid'
 import { authClient } from '@/lib/auth-client'
 import { useRouter } from 'vue-router'
 import AlertMessage from '../../UI/AlertMessage.vue'
@@ -38,6 +40,12 @@ const handleLogOut = async () => {
     showError.value = true
   }
 }
+
+const handleManageAccount = () => {
+  router.push({
+    name: 'user'
+  })
+}
 </script>
 
 <template>
@@ -54,7 +62,11 @@ const handleLogOut = async () => {
   >
     <div class="flex mb-2 justify-between items-center">
       <div class="flex gap-2">
-        <img src="@/assets/avatar.png" alt="logo" class="w-5 h-5" />
+        <img
+          src="@/assets/soul-monkey-black-bg-avatar.png"
+          alt="logo"
+          class="w-5 h-5"
+        />
         <div class="text-primary">
           <span class="text-secondary">RealTime</span>Market
         </div>
@@ -62,27 +74,32 @@ const handleLogOut = async () => {
       <div>
         <div class="dropdown dropdown-end">
           <img
-            src="@/assets/avatar.png"
-            alt="logo"
+            src="@/assets/soul-monkey-black-bg-avatar.png"
+            alt="user avatar"
             tabindex="0"
             role="button"
             class="cursor-pointer w-8 h-8 object-cover rounded-full"
           />
           <ul
             tabindex="-1"
-            class="dropdown-content menu bg-secondary-content rounded-box z-1 w-52 p-2 shadow-sm"
+            class="dropdown-content menu bg-secondary-content rounded-2xl z-1 w-52 p-2 shadow-sm border-neutral border inset-shadow-sm inset-shadow-neutral"
           >
-            <li>
-              <a class="hover:bg-neutral active:text-accent text-primary"
-                >Item 1</a
+            <li class="py-2">
+              <button
+                @click="handleManageAccount"
+                class="flex hover:bg-neutral active:text-accent text-primary hover:text-accent"
               >
+                <Cog8ToothIcon class="size-4" />
+                <div class="text-xs">Manage Account</div>
+              </button>
             </li>
-            <li>
+            <li class="border-t-primary border-t">
               <button
                 @click="handleLogOut"
-                class="hover:bg-neutral active:text-accent text-primary"
+                class="flex hover:bg-neutral active:text-accent text-primary hover:text-accent"
               >
-                Log out
+                <ArrowRightStartOnRectangleIcon class="size-4" />
+                <div class="text-xs">Log Out</div>
               </button>
             </li>
           </ul>
@@ -96,7 +113,7 @@ const handleLogOut = async () => {
     >
       <li class="flex-1">
         <router-link
-          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-secondary-content"
+          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-neutral"
           :to="{ name: 'home' }"
         >
           <HomeIcon class="size-5" />
@@ -108,7 +125,7 @@ const handleLogOut = async () => {
       </li>
       <li class="flex-1">
         <router-link
-          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-secondary-content"
+          class="flex flex-col items-center gap-1 py-2 px-3 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-neutral"
           to="/watchlist"
         >
           <StarIcon class="size-5" />

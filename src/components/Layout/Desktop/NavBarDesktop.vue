@@ -18,7 +18,7 @@ import SearchCommand from '@/components/UI/SearchCommand.vue'
       </li>
       <li>
         <router-link
-          class="flex items-center gap-2 py-1 px-2 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-secondary-content"
+          class="flex items-center gap-2 py-1 px-2 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-neutral"
           :to="{ name: 'home' }"
         >
           <HomeIcon class="size-5" />
@@ -27,7 +27,7 @@ import SearchCommand from '@/components/UI/SearchCommand.vue'
       </li>
       <li>
         <router-link
-          class="flex items-center gap-2 py-1 px-2 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-secondary-content"
+          class="flex items-center gap-2 py-1 px-2 rounded-xl transition delay-150 duration-300 ease-in-out hover:bg-neutral"
           to="/watchlist"
         >
           <StarIcon class="size-5" />

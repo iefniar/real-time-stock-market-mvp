@@ -19,7 +19,7 @@ const router = createRouter({
   }},
     {path: "/:catchAll(.*)", component: NotFoundPage, name: "notFound"},
   ],
-  linkActiveClass: "text-accent bg-neutral",
+  linkActiveClass: "text-accent bg-secondary-content border-neutral border inset-shadow-sm inset-shadow-neutral",
 });
 
 router.beforeEach(async (to) => {

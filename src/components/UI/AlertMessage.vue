@@ -2,7 +2,7 @@
   <div class="alert-container">
     <div
       role="alert"
-      :class="`alert alert-${type} alert-vertical sm:alert-horizontal drop-shadow-xl/50 drop-shadow-${type}`"
+      :class="`alert alert-${type} border-neutral border inset-shadow-sm inset-shadow-neutral alert-vertical sm:alert-horizontal drop-shadow-xl/25 drop-shadow-${type}`"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
