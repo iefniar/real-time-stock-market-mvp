@@ -16,7 +16,7 @@
             class="cursor-pointer transition duration-300 ease-in-out hover:text-accent hover:drop-shadow-lg/50 hover:drop-shadow-accent"
             @click="closeDialog"
           >
-            <XCircleIcon class="size-8" />
+            <XMarkIcon class="size-6" />
           </button>
         </div>
         <input
@@ -76,7 +76,7 @@ import { RouterLink } from 'vue-router'
 
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 
-import { XCircleIcon } from '@heroicons/vue/24/solid'
+import { XMarkIcon } from '@heroicons/vue/24/solid'
 
 import { ArrowTrendingUpIcon } from '@heroicons/vue/24/outline'
 

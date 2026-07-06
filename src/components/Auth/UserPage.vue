@@ -8,6 +8,7 @@ import { DocumentCurrencyPoundIcon } from '@heroicons/vue/24/solid'
 import { ShieldExclamationIcon } from '@heroicons/vue/24/solid'
 import { SwatchIcon } from '@heroicons/vue/24/solid'
 import { ArchiveBoxXMarkIcon } from '@heroicons/vue/24/solid'
+import InfoCard from '../UI/InfoCard.vue'
 
 const router = useRouter()
 
@@ -31,68 +32,56 @@ onMounted(async () => {
 
 <template>
   <div v-if="user">
-    <div class="flex flex-col items-center">
-      <div class="flex flex-col py-4 gap-6">
-        <div class="flex items-center gap-4">
+    <div class="flex flex-col items-center min-h-dvh">
+      <div class="flex flex-col py-4 gap-2">
+        <div class="flex items-center gap-4 mb-2">
           <img
             src="@/assets/soul-monkey-black-bg-avatar.png"
             alt="user avatar"
-            class="w-30 h-30 object-cover rounded-full"
+            class="w-24 h-24 object-cover rounded-full"
           />
           <div class="flex flex-col gap-1">
-            <p class="archivo-black-regular text-info-content text-4xl">
+            <p class="text-info-content text-2xl">
               {{ user.name }}
             </p>
             <p class="text-secondary text-xs">{{ user.email }}</p>
           </div>
         </div>
-        <div class="flex items-center gap-4">
-          <div
-            class="flex flex-col min-w-48 gap-10 py-2 px-3 bg-neutral/50 rounded-2xl border-neutral-content border inset-shadow-sm inset-shadow-neutral-content drop-shadow-xl/15 drop-shadow-primary"
-          >
-            <div class="flex items-center gap-1 text-secondary/75 text-xs">
-              <GlobeAmericasIcon class="size-3" />
-              <div>Country</div>
-            </div>
-            <div class="text-info-content text-sm text-end">France</div>
-          </div>
-          <div
-            class="flex flex-col min-w-48 gap-10 py-2 px-3 bg-neutral/50 rounded-2xl border-neutral-content border inset-shadow-sm inset-shadow-neutral-content drop-shadow-xl/15 drop-shadow-primary"
-          >
-            <div class="flex items-center gap-1 text-secondary/75 text-xs">
-              <DocumentCurrencyPoundIcon class="size-3" />
-              <div>Investment Goals</div>
-            </div>
-            <div class="text-info-content text-sm text-end">Balanced</div>
-          </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-2">
+          <InfoCard :icon="GlobeAmericasIcon" label="Country" value="France" />
+          <InfoCard
+            :icon="DocumentCurrencyPoundIcon"
+            label="Investment Goals"
+            value="Balanced"
+          />
         </div>
-        <div class="flex items-center gap-4">
-          <div
-            class="flex flex-col min-w-48 gap-10 py-2 px-3 bg-neutral/50 rounded-2xl border-neutral-content border inset-shadow-sm inset-shadow-neutral-content drop-shadow-xl/15 drop-shadow-primary"
-          >
-            <div class="flex items-center gap-1 text-secondary/75 text-xs">
-              <ShieldExclamationIcon class="size-3" />
-              <div>Risk Tolerance</div>
-            </div>
-            <div class="text-info-content text-sm text-end">Medium</div>
-          </div>
-          <div
-            class="flex flex-col min-w-48 gap-10 py-2 px-3 bg-neutral/50 rounded-2xl border-neutral-content border inset-shadow-sm inset-shadow-neutral-content drop-shadow-xl/15 drop-shadow-primary"
-          >
-            <div class="flex items-center gap-1 text-secondary/75 text-xs">
-              <SwatchIcon class="size-3" />
-              <div>Preferred Industry</div>
-            </div>
-            <div class="text-info-content text-sm text-end">Consumer Goods</div>
-          </div>
+        <div class="flex flex-col md:flex-row md:items-center gap-2">
+          <InfoCard
+            :icon="ShieldExclamationIcon"
+            label="Risk Tolerance"
+            value="Medium"
+          />
+          <InfoCard
+            :icon="SwatchIcon"
+            label="Preferred Industry"
+            value="Consumer Goods"
+          />
         </div>
-        <div class="self-end">
-          <button
-            class="btn bg-error shadow-none border-none drop-shadow-lg/50 drop-shadow-error transition duration-300 ease-in-out z-10 hover:brightness-125"
-          >
-            <ArchiveBoxXMarkIcon class="size-3" />
-            <span class="text-error-content font-normal">Delete Account</span>
-          </button>
+        <div
+          tabindex="0"
+          class="collapse collapse-arrow bg-neutral/50 rounded-2xl border-neutral-content border"
+        >
+          <div class="collapse-title text-secondary/75 text-sm">
+            Manage account deletion
+          </div>
+          <div class="collapse-content text-sm">
+            <button
+              class="btn bg-error rounded-xl shadow-none border-none drop-shadow-sm/75 drop-shadow-error transition duration-300 ease-in-out z-10 hover:brightness-125"
+            >
+              <ArchiveBoxXMarkIcon class="size-3" />
+              <span class="text-error-content font-normal">Delete Account</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

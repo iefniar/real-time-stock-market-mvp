@@ -2,7 +2,7 @@
   <div class="alert-container">
     <div
       role="alert"
-      :class="`alert alert-${type} border-neutral border inset-shadow-sm inset-shadow-neutral alert-vertical sm:alert-horizontal drop-shadow-xl/25 drop-shadow-${type}`"
+      :class="`alert alert-${type} border-neutral border inset-shadow-sm inset-shadow-neutral alert-vertical sm:alert-horizontal drop-shadow-sm/25 drop-shadow-${type}`"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +19,7 @@
       </svg>
       <span>{{ message }}</span>
       <button
-        class="btn bg-primary w-full shadow-none border-none drop-shadow-lg/50 drop-shadow-primary transition duration-300 ease-in-out z-10 hover:brightness-125"
+        class="btn bg-primary w-full shadow-none border-none drop-shadow-sm/50 drop-shadow-primary transition duration-300 ease-in-out z-10 hover:brightness-125"
         @click="emit('close')"
       >
         <span class="text-accent font-normal">OK</span>
