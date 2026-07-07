@@ -1,7 +1,7 @@
 <template>
   <!-- Trigger -->
   <button
-    class="w-full flex items-center justify-between py-4.5 sm:py-1 px-3 sm:px-2 rounded-xl cursor-pointer transition delay-150 duration-300 ease-in-out hover:bg-neutral"
+    class="w-full flex items-center justify-between py-4.5 sm:py-1 px-3 rounded-xl cursor-pointer transition delay-150 duration-300 ease-in-out hover:bg-neutral"
     @click="open = true"
   >
     <div>{{ label }}</div>
