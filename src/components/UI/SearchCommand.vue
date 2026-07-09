@@ -1,32 +1,41 @@
 <template>
   <!-- Trigger -->
   <button
-    class="w-full flex items-center justify-between py-4.5 sm:py-1 px-3 rounded-xl cursor-pointer transition delay-150 duration-300 ease-in-out hover:bg-neutral"
+    class="w-full flex flex-col sm:flex-row items-center gap-1 sm:gap-2 py-2 sm:py-1 px-3 sm:px-2 rounded-xl cursor-pointer transition delay-150 duration-300 ease-in-out hover:bg-neutral"
     @click="open = true"
   >
-    <div>{{ label }}</div>
     <MagnifyingGlassIcon class="size-5" />
+    <div class="text-sm sm:text-base">{{ label }}</div>
   </button>
   <!-- Modal -->
   <dialog class="modal" :class="{ 'modal-open': open }">
-    <div class="modal-box rounded-2xl bg-secondary-content relative max-h-[80dvh] p-0 border-neutral border inset-shadow-sm inset-shadow-neutral">
-      <div class="sticky top-0 z-10 bg-secondary-content py-1 pl-4 pr-2 border-b">
-        <div class="modal-action mt-0">
-          <button
-            class="cursor-pointer transition duration-300 ease-in-out hover:text-accent hover:drop-shadow-lg/50 hover:drop-shadow-accent"
-            @click="closeDialog"
-          >
-            <XMarkIcon class="size-6" />
-          </button>
+    <div
+      class="modal-box rounded-xl bg-secondary-content relative max-h-[80dvh] p-0 border-neutral border inset-shadow-sm inset-shadow-neutral"
+    >
+      <div
+        class="sticky top-0 z-10 bg-secondary-content py-2 pl-4 pr-2 border-b"
+      >
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-1">
+            <MagnifyingGlassIcon class="size-5" />
+            <input
+              v-model="searchTerm"
+              type="text"
+              placeholder="Search stocks..."
+              class="w-full focus:outline-none"
+            />
+          </div>
+          <div class="modal-action mt-0">
+            <button
+              class="cursor-pointer transition duration-300 ease-in-out hover:text-accent hover:drop-shadow-lg/50 hover:drop-shadow-accent"
+              @click="closeDialog"
+            >
+              <XMarkIcon class="size-5" />
+            </button>
+          </div>
         </div>
-        <input
-          v-model="searchTerm"
-          type="text"
-          placeholder="Search stocks..."
-          class="w-full focus:outline-none"
-        />
       </div>
-      <div class="mt-4 p-4 pt-0">
+      <div class="mt-2 p-4 pt-0">
         <div v-if="loading" class="flex gap-4 justify-center items-center">
           <div>Loading stocks...</div>
           <span class="loading loading-spinner loading-sm bg-accent" />
