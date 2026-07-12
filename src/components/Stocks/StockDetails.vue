@@ -1,24 +1,24 @@
 <template>
-  <div class="flex min-h-screen p-4 md:p-6 lg:p-8">
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-      <!-- Left column -->
-      <div class="flex flex-col gap-6">
+  <div class="flex min-h-screen flex-col lg:flex-row gap-4 xl:px-16">
+    <div class="lg:w-1/2 flex flex-col gap-4">
+      <div class="w-full border border-neutral-content">
         <TradingViewSymbolInfoWidget :symbol="symbol" />
-
-        <TradingViewAdvancedChartWidget :symbol="symbol" />
-
-        <TradingViewAdvancedChartWidget :symbol="symbol" />
       </div>
-
-      <!-- Right column -->
-      <div class="flex flex-col gap-6">
-        <TradingViewTechnicalAnalysisWidget :symbol="symbol" />
-
-        <TradingViewCompanyProfileWidget :symbol="symbol" />
-
+      <div class="w-full h-80 lg:h-full border border-neutral-content">
         <TradingViewFundamentalDataWidget :symbol="symbol" />
       </div>
-    </section>
+    </div>
+    <div class="lg:w-1/2 flex flex-col gap-4">
+      <div>
+        <TradingViewCompanyProfileWidget :symbol="symbol" />
+      </div>
+      <div>
+        <TradingViewTechnicalAnalysisWidget :symbol="symbol" />
+      </div>
+      <div class="h-80">
+        <TradingViewAdvancedChartWidget :symbol="symbol" />
+      </div>
+    </div>
   </div>
 </template>
 

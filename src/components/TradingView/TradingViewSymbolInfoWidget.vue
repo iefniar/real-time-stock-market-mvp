@@ -1,9 +1,9 @@
 <template>
   <div
     ref="container"
-    class="tradingview-widget-container w-full"
+    class="tradingview-widget-container w-full h-full"
   >
-    <div class="tradingview-widget-container__widget w-full"></div>
+    <div class="tradingview-widget-container__widget w-full h-full"></div>
   </div>
 </template>
 
@@ -32,7 +32,7 @@ const props = withDefaults(
     symbol: "NASDAQ:AAPL",
     theme: "dark",
     locale: "en",
-    width: 550
+    width: '100%'
   }
 );
 
@@ -68,9 +68,9 @@ const loadWidget = (): void => {
   script.innerHTML = JSON.stringify({
     symbol: props.symbol,
     colorTheme: props.theme,
-    isTransparent: false,
+    isTransparent: true,
     locale: props.locale,
-    width: props.width,
+    width: props.width
   });
 
   container.value.appendChild(script);

@@ -3,14 +3,9 @@ import TradingViewAdvancedChartWidget from '@/components/TradingView/TradingView
 import TradingViewMarketOverviewWidget from '@/components/TradingView/TradingViewMarketOverviewWidget.vue'
 import TradingViewStockHeatmapWidget from '@/components/TradingView/TradingViewStockHeatmapWidget.vue'
 import TradingViewMarketDataWidget from '@/components/TradingView/TradingViewMarketDataWidget.vue'
-import TradingViewSymbolInfoWidget from '@/components/TradingView/TradingViewSymbolInfoWidget.vue';
-import TradingViewTechnicalAnalysisWidget from '@/components/TradingView/TradingViewTechnicalAnalysisWidget.vue';
-import TradingViewCompanyProfileWidget from '@/components/TradingView/TradingViewCompanyProfileWidget.vue';
-import TradingViewFundamentalDataWidget from '@/components/TradingView/TradingViewFundamentalDataWidget.vue';
 </script>
 
 <template>
-<!--
   <div class="flex flex-col gap-4 xl:px-16">
     <h3 class="text-lg text-secondary">Stock Heatmap</h3>
     <div class="flex gap-4 flex-col h-75 md:h-100 mb-4">
@@ -39,10 +34,4 @@ import TradingViewFundamentalDataWidget from '@/components/TradingView/TradingVi
       </div>
     </div>
   </div>
--->
-
-  <TradingViewSymbolInfoWidget />
-  <TradingViewTechnicalAnalysisWidget />
-  <TradingViewCompanyProfileWidget />
-  <TradingViewFundamentalDataWidget />
 </template>

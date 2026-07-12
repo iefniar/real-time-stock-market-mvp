@@ -16,9 +16,11 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  symbol: 'NASDAQ:AAPL',
+  symbol: 'AAPL',
   theme: 'dark'
 })
+
+const symbolWithPrefix = "NASDAQ:" + props.symbol
 
 const widget = ref<HTMLElement | null>(null)
 
@@ -58,7 +60,7 @@ async function loadScript() {
 function updateWidget() {
   if (!widget.value) return
 
-  widget.value.setAttribute('symbol', props.symbol)
+  widget.value.setAttribute('symbol', symbolWithPrefix)
 
   widget.value.setAttribute('theme', props.theme)
 }
@@ -67,6 +69,8 @@ onMounted(async () => {
   await loadScript()
 
   updateWidget()
+
+   console.log('symbolWithPrefix: ', symbolWithPrefix);
 })
 
 watch(() => [props.symbol, props.theme] as const, updateWidget)

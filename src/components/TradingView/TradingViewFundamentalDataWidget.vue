@@ -32,8 +32,8 @@ const props = withDefaults(
     symbol: "NASDAQ:AAPL",
     theme: "dark",
     locale: "en",
-    width: 400,
-    height: 550
+    width: '100%',
+    height: '100%'
   }
 );
 
@@ -61,7 +61,7 @@ const loadWidget = (): void => {
     symbol: props.symbol,
     colorTheme: props.theme,
     displayMode: "regular",
-    isTransparent: false,
+    isTransparent: true,
     locale: props.locale,
     width: props.width,
     height: props.height,

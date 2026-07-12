@@ -51,6 +51,7 @@ const loadWidget = (): void => {
     autosize: true,
     backgroundColor: "rgb(3,7,18)",
     gridColor: "rgba(99, 102, 241, 0.1)",
+    style: 10,
   });
 
   container.value.appendChild(script);
