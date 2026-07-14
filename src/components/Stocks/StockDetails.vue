@@ -9,6 +9,14 @@
       </div>
     </div>
     <div class="lg:w-1/2 flex flex-col gap-4">
+      <div class="flex justify-end">
+        <WatchlistButton
+          v-if="stock"
+          :symbol="stock.symbol"
+          :company="stock.company"
+          :is-in-watchlist="isInWatchlist"
+        />
+      </div>
       <div>
         <TradingViewCompanyProfileWidget :symbol="symbol" />
       </div>
@@ -23,15 +31,67 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, watch } from 'vue'
 import TradingViewSymbolInfoWidget from '@/components/TradingView/TradingViewSymbolInfoWidget.vue'
 import TradingViewAdvancedChartWidget from '@/components/TradingView/TradingViewAdvancedChartWidget.vue'
 import TradingViewTechnicalAnalysisWidget from '@/components/TradingView/TradingViewTechnicalAnalysisWidget.vue'
 import TradingViewCompanyProfileWidget from '@/components/TradingView/TradingViewCompanyProfileWidget.vue'
 import TradingViewFundamentalDataWidget from '@/components/TradingView/TradingViewFundamentalDataWidget.vue'
+import WatchlistButton from './WatchlistButton.vue'
+import type { StockDetails } from '@/types/global.ts'
 
 interface Props {
   symbol: string
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+
+const stock = ref<StockDetails | null>(null)
+
+const isInWatchlist = ref(false)
+
+const loading = ref(true)
+
+const error = ref('')
+
+async function loadPage() {
+  loading.value = true
+
+  try {
+    // Fetch stock details
+    const stockResponse = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/api/finnhub/stocks/${props.symbol}`
+    )
+
+    if (!stockResponse.ok) {
+      throw new Error('Failed to load stock.')
+    }
+
+    stock.value = await stockResponse.json()
+
+    // Fetch watchlist
+    const watchlistResponse = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/api/watchlist`,
+      {
+        credentials: 'include'
+      }
+    )
+
+    if (watchlistResponse.ok) {
+      const watchlist = await watchlistResponse.json()
+
+      isInWatchlist.value = watchlist.some(
+        (item: any) => item.symbol.toUpperCase() === props.symbol.toUpperCase()
+      )
+    }
+  } catch (err) {
+    console.error(err)
+
+    error.value = 'Unable to load stock details.'
+  } finally {
+    loading.value = false
+  }
+}
+
+onMounted(loadPage)
 </script>

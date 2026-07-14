@@ -56,3 +56,27 @@ export type Stock = {
 export type StockWithWatchlistStatus = Stock & {
   isInWatchlist: boolean
 }
+
+export type StockDetails = {
+  symbol: string
+  company: string
+  currentPrice: number
+  changePercent: number
+  priceFormatted: string
+  changeFormatted: string
+  peRatio: string
+  marketCapFormatted: string
+}
+
+export type StockWithData = {
+  userId: string
+  symbol: string
+  company: string
+  addedAt: Date
+  currentPrice?: number
+  changePercent?: number
+  priceFormatted?: string
+  changeFormatted?: string
+  marketCap?: string
+  peRatio?: string
+}

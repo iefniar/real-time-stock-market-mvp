@@ -3,6 +3,7 @@ import SignUpPage from '@/components/Auth/SignUpPage.vue'
 import LogInPage from '@/components/Auth/LogInPage.vue'
 import UserPage from '@/components/Auth/UserPage.vue'
 import StockDetails from '@/components/Stocks/StockDetails.vue'
+import Watchlist from '@/components/Stocks/Watchlist.vue'
 import NotFoundPage from '@/components/NotFoundPage.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { authClient } from '@/lib/auth-client'
@@ -24,6 +25,14 @@ const router = createRouter({
       path: '/user',
       component: UserPage,
       name: 'user',
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/watchlist',
+      component: Watchlist,
+      name: 'watchlist',
       meta: {
         requiresAuth: true
       }

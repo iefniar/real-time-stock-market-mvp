@@ -57,7 +57,7 @@
                 @click="handleSelectStock"
               >
                 <ArrowTrendingUpIcon class="w-5 h-5 text-gray-700" />
-                <div>
+                <div class="flex-1">
                   <div class="font-medium">
                     {{ stock.name }}
                   </div>
@@ -69,6 +69,12 @@
                     {{ stock.type }}
                   </div>
                 </div>
+                <WatchlistButton
+                  :symbol="stock.symbol"
+                  :company="stock.name"
+                  :is-in-watchlist="stock.isInWatchlist"
+                  @watchlist-change="handleWatchlistChange"
+                />
               </RouterLink>
             </li>
           </ul>
@@ -91,6 +97,8 @@ import { ArrowTrendingUpIcon } from '@heroicons/vue/24/outline'
 
 import type { StockWithWatchlistStatus } from '@/types/global'
 
+import WatchlistButton from '../Stocks/WatchlistButton.vue'
+
 withDefaults(
   defineProps<{
     label?: string
@@ -99,6 +107,10 @@ withDefaults(
     label: 'Search stock'
   }
 )
+
+const emit = defineEmits<{
+  (e: 'watchlist-updated'): void
+}>()
 
 const open = ref(false)
 
@@ -121,7 +133,9 @@ let timeout: number
 watch(searchTerm, () => {
   clearTimeout(timeout)
 
-  timeout = setTimeout(handleSearch, 500)
+  timeout = window.setTimeout(() => {
+    handleSearch()
+  }, 500)
 })
 
 async function loadPopularStocks() {
@@ -129,18 +143,17 @@ async function loadPopularStocks() {
 
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_BACKEND_URL}/api/finnhub/stocks/search`
+      `${import.meta.env.VITE_BACKEND_URL}/api/finnhub/stocks/search`,
+      {
+        credentials: 'include'
+      }
     )
 
     if (!response.ok) {
       throw new Error(`Request failed: ${response.status}`)
     }
 
-    const data = await response.json()
-
-    console.log('Popular stocks:', data)
-
-    popularStocks.value = data
+    popularStocks.value = await response.json()
   } catch (error) {
     console.error('Popular stock error:', error)
 
@@ -160,17 +173,48 @@ async function handleSearch() {
 
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_BACKEND_URL}/api/finnhub/stocks/search?q=${
-        searchTerm.value
-      }`
+      `${
+        import.meta.env.VITE_BACKEND_URL
+      }/api/finnhub/stocks/search?q=${encodeURIComponent(searchTerm.value)}`,
+      {
+        credentials: 'include'
+      }
     )
 
+    if (!response.ok) {
+      throw new Error(`Request failed: ${response.status}`)
+    }
+
     stocks.value = await response.json()
-  } catch {
+  } catch (error) {
+    console.error('Search error:', error)
+
     stocks.value = []
   }
 
   loading.value = false
+}
+
+function handleWatchlistChange(symbol: string, isAdded: boolean) {
+  stocks.value = stocks.value.map(stock =>
+    stock.symbol === symbol
+      ? {
+          ...stock,
+          isInWatchlist: isAdded
+        }
+      : stock
+  )
+
+  popularStocks.value = popularStocks.value.map(stock =>
+    stock.symbol === symbol
+      ? {
+          ...stock,
+          isInWatchlist: isAdded
+        }
+      : stock
+  )
+
+  emit('watchlist-updated')
 }
 
 function handleSelectStock() {
