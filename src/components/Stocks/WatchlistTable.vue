@@ -83,4 +83,5 @@ function handleWatchlistChange(symbol: string, isAdded: boolean) {
     emit('removed')
   }
 }
+
 </script>
