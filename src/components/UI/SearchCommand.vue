@@ -53,7 +53,7 @@
             <li v-for="stock in displayStocks" :key="stock.symbol">
               <RouterLink
                 :to="`/stocks/${stock.symbol}`"
-                class="flex items-center gap-3 p-3 rounded-lg hover:bg-secondary"
+                class="flex items-center gap-3 p-3 rounded-lg transition duration-300 ease-in-out hover:bg-secondary"
                 @click="handleSelectStock"
               >
                 <ArrowTrendingUpIcon class="w-5 h-5 text-gray-700" />
@@ -70,6 +70,7 @@
                   </div>
                 </div>
                 <WatchlistButton
+                  :type="type"
                   :symbol="stock.symbol"
                   :company="stock.name"
                   :is-in-watchlist="stock.isInWatchlist"
@@ -86,31 +87,30 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-
 import { RouterLink } from 'vue-router'
-
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
-
 import { XMarkIcon } from '@heroicons/vue/24/solid'
-
 import { ArrowTrendingUpIcon } from '@heroicons/vue/24/outline'
-
 import type { StockWithWatchlistStatus } from '@/types/global'
-
 import WatchlistButton from '../Stocks/WatchlistButton.vue'
+import { useWatchlistStore } from '@/stores/watchlist'
 
 withDefaults(
   defineProps<{
     label?: string
+    type?: 'button' | 'icon'
   }>(),
   {
-    label: 'Search stock'
+    label: 'Search stock',
+    type: 'button'
   }
 )
 
-const emit = defineEmits<{
-  (e: 'watchlist-updated'): void
-}>()
+const watchlistStore = useWatchlistStore()
+
+const displayStocks = computed(() =>
+  isSearchMode.value ? stocks.value : watchlistStore.popularStocks.slice(0, 10)
+)
 
 const open = ref(false)
 
@@ -120,13 +120,7 @@ const loading = ref(false)
 
 const stocks = ref<StockWithWatchlistStatus[]>([])
 
-const popularStocks = ref<StockWithWatchlistStatus[]>([])
-
 const isSearchMode = computed(() => searchTerm.value.trim().length > 0)
-
-const displayStocks = computed(() =>
-  isSearchMode.value ? stocks.value : popularStocks.value.slice(0, 10)
-)
 
 let timeout: number
 
@@ -137,31 +131,6 @@ watch(searchTerm, () => {
     handleSearch()
   }, 500)
 })
-
-async function loadPopularStocks() {
-  loading.value = true
-
-  try {
-    const response = await fetch(
-      `${import.meta.env.VITE_BACKEND_URL}/api/finnhub/stocks/search`,
-      {
-        credentials: 'include'
-      }
-    )
-
-    if (!response.ok) {
-      throw new Error(`Request failed: ${response.status}`)
-    }
-
-    popularStocks.value = await response.json()
-  } catch (error) {
-    console.error('Popular stock error:', error)
-
-    popularStocks.value = []
-  }
-
-  loading.value = false
-}
 
 async function handleSearch() {
   if (!isSearchMode.value) {
@@ -185,7 +154,18 @@ async function handleSearch() {
       throw new Error(`Request failed: ${response.status}`)
     }
 
-    stocks.value = await response.json()
+    const results = await response.json()
+
+    stocks.value = results.map((stock: StockWithWatchlistStatus) => {
+      const exists = watchlistStore.watchlist.some(
+        item => item.symbol === stock.symbol
+      )
+
+      return {
+        ...stock,
+        isInWatchlist: exists
+      }
+    })
   } catch (error) {
     console.error('Search error:', error)
 
@@ -195,7 +175,7 @@ async function handleSearch() {
   loading.value = false
 }
 
-function handleWatchlistChange(symbol: string, isAdded: boolean) {
+async function handleWatchlistChange(symbol: string, isAdded: boolean) {
   stocks.value = stocks.value.map(stock =>
     stock.symbol === symbol
       ? {
@@ -205,16 +185,9 @@ function handleWatchlistChange(symbol: string, isAdded: boolean) {
       : stock
   )
 
-  popularStocks.value = popularStocks.value.map(stock =>
-    stock.symbol === symbol
-      ? {
-          ...stock,
-          isInWatchlist: isAdded
-        }
-      : stock
-  )
+  watchlistStore.updateStock(symbol, isAdded)
 
-  emit('watchlist-updated')
+  await watchlistStore.refresh()
 }
 
 function handleSelectStock() {
@@ -236,8 +209,6 @@ function handleKeydown(e: KeyboardEvent) {
 }
 
 onMounted(() => {
-  loadPopularStocks()
-
   window.addEventListener('keydown', handleKeydown)
 })
 

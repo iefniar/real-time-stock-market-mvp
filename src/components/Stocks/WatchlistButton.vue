@@ -4,35 +4,40 @@
     v-if="type === 'icon'"
     :title="buttonTitle"
     :aria-label="buttonTitle"
-    class="cursor-pointer transition duration-300 hover:text-yellow-400"
+    class="cursor-pointer transition duration-300 hover:text-accent"
     @click.stop.prevent="toggleWatchlist"
   >
     <TrashIcon
       v-if="showTrashIcon && isInWatchlist"
-      class="size-5 text-red-500"
+      class="size-5 text-error hover:text-accent"
     />
     <StarIcon
       v-else
       class="size-5"
-      :class="isInWatchlist ? 'text-yellow-400 fill-yellow-400' : ''"
+      :class="isInWatchlist ? 'text-accent' : ''"
     />
   </button>
   <!-- Button version -->
   <button
     v-else
-    class="btn"
-    :class="isInWatchlist ? 'btn-error' : 'btn-warning'"
+    class="btn shadow-none border-none transition duration-300 ease-in-out hover:brightness-150"
+    :class="isInWatchlist ? 'btn-error' : 'btn-primary'"
     @click.stop.prevent="toggleWatchlist"
   >
     <TrashIcon v-if="showTrashIcon && isInWatchlist" class="size-4" />
-    {{ isInWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist' }}
+    <div class="text-primary-content hidden sm:flex">
+      {{ isInWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist' }}
+    </div>
+    <div class="text-primary-content flex sm:hidden">
+      {{ isInWatchlist ? 'Remove' : 'Add' }}
+    </div>
   </button>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-
 import { StarIcon, TrashIcon } from '@heroicons/vue/24/solid'
+import { useWatchlistStore } from '@/stores/watchlist'
 
 interface Props {
   symbol: string
@@ -62,6 +67,8 @@ const buttonTitle = computed(() =>
     : `Add ${props.symbol} to watchlist`
 )
 
+const watchlistStore = useWatchlistStore()
+
 async function toggleWatchlist() {
   try {
     const response = await fetch(
@@ -90,7 +97,13 @@ async function toggleWatchlist() {
       throw new Error('Request failed')
     }
 
-    emit('watchlist-change', props.symbol, !props.isInWatchlist)
+    const isAdded = !props.isInWatchlist
+
+    watchlistStore.updateStock(props.symbol, isAdded)
+
+    await watchlistStore.refresh()
+
+    emit('watchlist-change', props.symbol, isAdded)
   } catch (error) {
     console.error('Watchlist error:', error)
   }

@@ -7,6 +7,6 @@ export function getInitials(fullName: string): string {
 }
 
 export const getChangeColorClass = (changePercent?: number) => {
-  if (changePercent == null) return 'text-gray-400';
-  return changePercent > 0 ? 'text-green-500' : 'text-red-500';
+  if (changePercent == null) return 'text-secondary';
+  return changePercent > 0 ? 'text-accent' : 'text-error';
 };

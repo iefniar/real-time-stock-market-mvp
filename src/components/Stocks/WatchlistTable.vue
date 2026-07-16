@@ -1,8 +1,8 @@
 <template>
-  <div class="overflow-x-auto rounded-xl border border-base-300">
-    <table class="table table-zebra">
+  <div class="overflow-x-auto px-2 py-4 rounded-xl border-neutral-content border bg-secondary-content">
+    <table class="table">
       <thead>
-        <tr>
+        <tr class="text-primary">
           <th>Company</th>
           <th>Symbol</th>
           <th>Price</th>
@@ -17,7 +17,7 @@
         <tr
           v-for="item in watchlist"
           :key="item.symbol"
-          class="cursor-pointer hover"
+          class="text-secondary cursor-pointer hover:bg-primary transition duration-300 ease-in-out"
           @click="goToStock(item.symbol)"
         >
           <td>{{ item.company }}</td>
@@ -35,7 +35,7 @@
             {{ item.peRatio || '—' }}
           </td>
           <td>
-            <button class="btn btn-sm btn-outline" @click.stop>
+            <button class="btn bg-accent w-full shadow-none border-none transition duration-300 ease-in-out hover:bg-primary-content hover:text-accent" @click.stop>
               Add Alert
             </button>
           </td>
