@@ -108,10 +108,6 @@ withDefaults(
 
 const watchlistStore = useWatchlistStore()
 
-const displayStocks = computed(() =>
-  isSearchMode.value ? stocks.value : watchlistStore.popularStocks.slice(0, 10)
-)
-
 const open = ref(false)
 
 const searchTerm = ref('')
@@ -121,6 +117,10 @@ const loading = ref(false)
 const stocks = ref<StockWithWatchlistStatus[]>([])
 
 const isSearchMode = computed(() => searchTerm.value.trim().length > 0)
+
+const displayStocks = computed(() =>
+  isSearchMode.value ? stocks.value : watchlistStore.popularStocks.slice(0, 10)
+)
 
 let timeout: number
 

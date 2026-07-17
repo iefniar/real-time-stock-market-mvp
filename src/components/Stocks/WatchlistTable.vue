@@ -1,5 +1,7 @@
 <template>
-  <div class="overflow-x-auto px-2 py-4 rounded-xl border-neutral-content border bg-secondary-content">
+  <div
+    class="overflow-x-auto px-2 py-4 rounded-xl border-neutral-content border bg-secondary-content"
+  >
     <table class="table">
       <thead>
         <tr class="text-primary">
@@ -35,8 +37,12 @@
             {{ item.peRatio || '—' }}
           </td>
           <td>
-            <button class="btn bg-accent w-full shadow-none border-none transition duration-300 ease-in-out hover:bg-primary-content hover:text-accent" @click.stop>
-              Add Alert
+            <button
+              class="btn w-full shadow-none border-none transition duration-300 ease-in-out hover:drop-shadow-lg/50 hover:drop-shadow-neutral"
+              :class="item.isNewsViaEmailActive ? 'bg-accent text-primary-content' : 'bg-primary-content text-accent'"
+              @click.stop="toggleNewsViaEmail(item.symbol)"
+            >
+              {{ item.isNewsViaEmailActive ? 'Disable News' : 'Enable News' }}
             </button>
           </td>
           <td>
@@ -70,6 +76,7 @@ defineProps<{
 
 const emit = defineEmits<{
   (e: 'removed'): void
+  (e: 'news-email-updated', symbol: string, isNewsViaEmailActive: boolean): void
 }>()
 
 const router = useRouter()
@@ -84,4 +91,25 @@ function handleWatchlistChange(symbol: string, isAdded: boolean) {
   }
 }
 
+async function toggleNewsViaEmail(symbol: string) {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/api/watchlist/${symbol}/news-email`,
+      {
+        method: 'PATCH',
+        credentials: 'include'
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error('Failed to update email notifications')
+    }
+
+    const data = await response.json()
+
+    emit('news-email-updated', symbol, data.isNewsViaEmailActive)
+  } catch (error) {
+    console.error(error)
+  }
+}
 </script>

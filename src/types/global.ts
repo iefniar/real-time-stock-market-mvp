@@ -44,6 +44,10 @@ export type User = {
   id: string
   name: string
   email: string
+  country: string
+  investmentGoals: string
+  riskTolerance: string
+  preferredIndustry: string
 }
 
 export type Stock = {
@@ -66,6 +70,7 @@ export type StockDetails = {
   changeFormatted: string
   peRatio: string
   marketCapFormatted: string
+  isNewsViaEmailActive?: boolean
 }
 
 export type StockWithData = {
@@ -73,6 +78,7 @@ export type StockWithData = {
   symbol: string
   company: string
   addedAt: Date
+  isNewsViaEmailActive: boolean
   currentPrice?: number
   changePercent?: number
   priceFormatted?: string

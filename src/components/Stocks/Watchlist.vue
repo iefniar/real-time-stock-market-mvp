@@ -22,7 +22,10 @@
       <div>
         <h3 class="text-lg text-secondary">Watchlist</h3>
       </div>
-      <WatchlistTable :watchlist="watchlistStore.watchlist" />
+      <WatchlistTable
+        :watchlist="watchlistStore.watchlist"
+        @news-email-updated="handleNewsEmailUpdated"
+      />
     </section>
   </div>
 </template>
@@ -36,8 +39,15 @@ import { useWatchlistStore } from '@/stores/watchlist'
 
 const watchlistStore = useWatchlistStore()
 
+function handleNewsEmailUpdated(symbol: string, isNewsViaEmailActive: boolean) {
+  const stock = watchlistStore.watchlist.find(stock => stock.symbol === symbol)
+
+  if (stock) {
+    stock.isNewsViaEmailActive = isNewsViaEmailActive
+  }
+}
+
 onMounted(() => {
   watchlistStore.refresh()
 })
-
 </script>

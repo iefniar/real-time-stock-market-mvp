@@ -9,7 +9,7 @@
   >
     <TrashIcon
       v-if="showTrashIcon && isInWatchlist"
-      class="size-5 text-error hover:text-accent"
+      class="size-5 text-error hover:text-accent hover:drop-shadow-lg/50 hover:drop-shadow-neutral"
     />
     <StarIcon
       v-else

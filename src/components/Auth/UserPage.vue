@@ -25,7 +25,11 @@ onMounted(async () => {
   user.value = {
     id: session.data.user.id,
     name: session.data.user.name,
-    email: session.data.user.email
+    email: session.data.user.email,
+    country: session.data.user.country,
+    investmentGoals: session.data.user.investmentGoals,
+    riskTolerance: session.data.user.riskTolerance,
+    preferredIndustry: session.data.user.preferredIndustry
   }
 })
 </script>
@@ -48,23 +52,27 @@ onMounted(async () => {
           </div>
         </div>
         <div class="flex flex-col md:flex-row md:items-center gap-2">
-          <InfoCard :icon="GlobeAmericasIcon" label="Country" value="France" />
+          <InfoCard
+            :icon="GlobeAmericasIcon"
+            label="Country"
+            :value="user.country"
+          />
           <InfoCard
             :icon="DocumentCurrencyPoundIcon"
             label="Investment Goals"
-            value="Balanced"
+            :value="user.investmentGoals"
           />
         </div>
         <div class="flex flex-col md:flex-row md:items-center gap-2">
           <InfoCard
             :icon="ShieldExclamationIcon"
             label="Risk Tolerance"
-            value="Medium"
+            :value="user.riskTolerance"
           />
           <InfoCard
             :icon="SwatchIcon"
             label="Preferred Industry"
-            value="Consumer Goods"
+            :value="user.preferredIndustry"
           />
         </div>
         <div

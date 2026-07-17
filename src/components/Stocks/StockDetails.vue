@@ -15,6 +15,7 @@
           :symbol="stock.symbol"
           :company="stock.company"
           :is-in-watchlist="isInWatchlist"
+          @watchlist-change="handleWatchlistChange"
         />
       </div>
       <div>
@@ -31,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import TradingViewSymbolInfoWidget from '@/components/TradingView/TradingViewSymbolInfoWidget.vue'
 import TradingViewAdvancedChartWidget from '@/components/TradingView/TradingViewAdvancedChartWidget.vue'
 import TradingViewTechnicalAnalysisWidget from '@/components/TradingView/TradingViewTechnicalAnalysisWidget.vue'
@@ -39,6 +40,7 @@ import TradingViewCompanyProfileWidget from '@/components/TradingView/TradingVie
 import TradingViewFundamentalDataWidget from '@/components/TradingView/TradingViewFundamentalDataWidget.vue'
 import WatchlistButton from './WatchlistButton.vue'
 import type { StockDetails } from '@/types/global.ts'
+import { useWatchlistStore } from '@/stores/watchlist'
 
 interface Props {
   symbol: string
@@ -46,9 +48,13 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const watchlistStore = useWatchlistStore()
+
 const stock = ref<StockDetails | null>(null)
 
-const isInWatchlist = ref(false)
+const isInWatchlist = computed(() =>
+  watchlistStore.watchlist.some(stock => stock.symbol === props.symbol)
+)
 
 const loading = ref(true)
 
@@ -69,21 +75,7 @@ async function loadPage() {
 
     stock.value = await stockResponse.json()
 
-    // Fetch watchlist
-    const watchlistResponse = await fetch(
-      `${import.meta.env.VITE_BACKEND_URL}/api/watchlist`,
-      {
-        credentials: 'include'
-      }
-    )
-
-    if (watchlistResponse.ok) {
-      const watchlist = await watchlistResponse.json()
-
-      isInWatchlist.value = watchlist.some(
-        (item: any) => item.symbol.toUpperCase() === props.symbol.toUpperCase()
-      )
-    }
+    await watchlistStore.loadWatchlist()
   } catch (err) {
     console.error(err)
 
@@ -91,6 +83,12 @@ async function loadPage() {
   } finally {
     loading.value = false
   }
+}
+
+async function handleWatchlistChange(symbol: string, isAdded: boolean) {
+  watchlistStore.updateStock(symbol, isAdded)
+
+  await watchlistStore.refresh()
 }
 
 onMounted(loadPage)
