@@ -84,7 +84,7 @@ onMounted(async () => {
           </div>
           <div class="collapse-content text-sm">
             <button
-              class="btn bg-error rounded-xl shadow-none border-none drop-shadow-sm/75 drop-shadow-error transition duration-300 ease-in-out z-10 hover:brightness-125"
+              class="btn bg-error rounded-md shadow-none border-none drop-shadow-sm/75 drop-shadow-error transition duration-300 ease-in-out z-10 hover:brightness-125"
             >
               <ArchiveBoxXMarkIcon class="size-3" />
               <span class="text-error-content font-normal">Delete Account</span>

@@ -1,7 +1,12 @@
 <template>
   <div
-    class="overflow-x-auto px-2 py-4 rounded-xl border-neutral-content border bg-secondary-content"
+    class="relative overflow-x-auto p-4 rounded-lg border-neutral-content border bg-secondary-content"
   >
+    <div
+      class="absolute inset-0 opacity-[0.1] dark:opacity-[0.1]"
+      :style="patternStyle"
+    ></div>
+    <div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
     <table class="table">
       <thead>
         <tr class="text-primary">
@@ -37,13 +42,48 @@
             {{ item.peRatio || '—' }}
           </td>
           <td>
-            <button
-              class="btn w-full shadow-none border-none transition duration-300 ease-in-out hover:drop-shadow-lg/50 hover:drop-shadow-neutral"
-              :class="item.isNewsViaEmailActive ? 'bg-accent text-primary-content' : 'bg-primary-content text-accent'"
-              @click.stop="toggleNewsViaEmail(item.symbol)"
+            <div
+              class="tooltip"
+              :class="
+                item.isNewsViaEmailActive ? 'tooltip-light' : 'tooltip-dark'
+              "
             >
-              {{ item.isNewsViaEmailActive ? 'Disable News' : 'Enable News' }}
-            </button>
+              <div
+                class="tooltip-content drop-shadow-lg/50 drop-shadow-neutral"
+              >
+                <div
+                  v-if="item.isNewsViaEmailActive"
+                  class="text-primary-content text-xs font-medium max-w-40"
+                >
+                  Disable to stop receiving this stock's news in your email
+                </div>
+                <div v-else class="text-accent text-xs font-medium max-w-40">
+                  Enable to start receiving this stock's news straight in your
+                  email twice a week
+                </div>
+              </div>
+              <button
+                class="btn w-full shadow-none border-none transition duration-300 ease-in-out hover:drop-shadow-lg/50 hover:drop-shadow-neutral"
+                :class="
+                  item.isNewsViaEmailActive
+                    ? 'bg-accent text-primary-content'
+                    : 'bg-primary-content text-accent'
+                "
+                @click.stop="toggleNewsViaEmail(item.symbol)"
+              >
+                <div
+                  v-if="item.isNewsViaEmailActive"
+                  class="flex gap-2 items-center justify-center"
+                >
+                  <NoSymbolIcon class="size-4" />
+                  Disable News
+                </div>
+                <div v-else class="flex gap-2 items-center justify-center">
+                  <PowerIcon class="size-4" />
+                  Enable News
+                </div>
+              </button>
+            </div>
           </td>
           <td>
             <WatchlistButton
@@ -63,12 +103,10 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-
 import WatchlistButton from './WatchlistButton.vue'
-
 import { getChangeColorClass } from '@/utils/functions'
-
 import type { StockWithData } from '@/types/global'
+import { NoSymbolIcon, PowerIcon } from '@heroicons/vue/24/solid'
 
 defineProps<{
   watchlist: StockWithData[]
@@ -78,6 +116,30 @@ const emit = defineEmits<{
   (e: 'removed'): void
   (e: 'news-email-updated', symbol: string, isNewsViaEmailActive: boolean): void
 }>()
+
+const patternStyle = {
+  backgroundImage: `
+    repeating-linear-gradient(
+      45deg,
+
+      #3b82f6 0px,
+      #3b82f6 1px,
+      rgba(59,130,246,0) 1px,
+      rgba(59,130,246,0) 10px,
+
+      #8b5cf6 10px,
+      #8b5cf6 11px,
+      rgba(139,92,246,0) 11px,
+      rgba(139,92,246,0) 20px,
+
+      #ec4899 20px,
+      #ec4899 21px,
+      rgba(236,72,153,0) 21px,
+      rgba(236,72,153,0) 30px
+    )
+  `,
+  backgroundSize: '7px 7px'
+}
 
 const router = useRouter()
 
@@ -113,3 +175,12 @@ async function toggleNewsViaEmail(symbol: string) {
   }
 }
 </script>
+
+<style scoped>
+.tooltip-dark {
+  --tt-bg: rgb(3, 7, 18) !important;
+}
+.tooltip-light {
+  --tt-bg: rgb(238, 13, 223) !important;
+}
+</style>
