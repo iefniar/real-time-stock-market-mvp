@@ -92,7 +92,7 @@ const handleManageAccount = () => {
   </div>
   <div class="px-2 py-6 z-20">
     <div class="flex gap-2 mb-3 px-2 pb-3">
-      <img src="@/assets/avatar.png" alt="logo" class="w-5 h-5" />
+      <img src="@/assets/rtsm-logo.svg" alt="logo" class="w-5 h-5" />
       <div class="text-primary">
         <span class="text-secondary">RealTime</span>Market
       </div>

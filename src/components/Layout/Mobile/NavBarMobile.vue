@@ -94,7 +94,7 @@ const handleManageAccount = () => {
     <div class="flex mb-2 justify-between items-center">
       <div class="flex gap-2">
         <img
-          src="@/assets/soul-monkey-black-bg-avatar.png"
+          src="@/assets/rtsm-logo.svg"
           alt="logo"
           class="w-5 h-5"
         />

@@ -3,16 +3,26 @@ import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { authClient } from '@/lib/auth-client'
 import { type User } from '@/types/global'
-import { GlobeAmericasIcon } from '@heroicons/vue/24/solid'
-import { DocumentCurrencyPoundIcon } from '@heroicons/vue/24/solid'
-import { ShieldExclamationIcon } from '@heroicons/vue/24/solid'
-import { SwatchIcon } from '@heroicons/vue/24/solid'
-import { ArchiveBoxXMarkIcon } from '@heroicons/vue/24/solid'
+import {
+  GlobeAmericasIcon,
+  DocumentCurrencyPoundIcon,
+  ShieldExclamationIcon,
+  SwatchIcon,
+  ArchiveBoxXMarkIcon,
+  XMarkIcon,
+  NoSymbolIcon
+} from '@heroicons/vue/24/solid'
 import InfoCard from '../UI/InfoCard.vue'
 
 const router = useRouter()
 
 const user = ref<User | null>(null)
+
+const open = ref(false)
+
+function closeDialog() {
+  open.value = false
+}
 
 onMounted(async () => {
   const session = await authClient.getSession()
@@ -85,6 +95,7 @@ onMounted(async () => {
           <div class="collapse-content text-sm">
             <button
               class="btn bg-error rounded-md shadow-none border-none drop-shadow-sm/75 drop-shadow-error transition duration-300 ease-in-out z-10 hover:brightness-125"
+              @click="open = true"
             >
               <ArchiveBoxXMarkIcon class="size-3" />
               <span class="text-error-content font-normal">Delete Account</span>
@@ -93,5 +104,74 @@ onMounted(async () => {
         </div>
       </div>
     </div>
+    <!-- Modal -->
+    <dialog class="modal" :class="{ 'modal-open': open }">
+      <div
+        class="modal-box rounded-xl bg-secondary-content relative max-h-[80dvh] p-0 border-neutral border inset-shadow-sm inset-shadow-neutral"
+      >
+        <div class="sticky top-0 z-10 bg-secondary-content py-6 pl-4 pr-2">
+          <div class="flex flex-col w-full items-center">
+            <div class="flex flex-col items-start gap-1">
+              <div class="text-lg font-light text-secondary">
+                Are you sure you want to delete your account?
+              </div>
+              <div class="text-xs font-bold text-error/90">
+                This action is permanent and cannot be undone.
+              </div>
+              <div class="mt-8 text-md font-light text-secondary">
+                Deleting your account will:
+              </div>
+              <ul class="flex flex-col gap-2 text-secondary/80">
+                <li
+                  class="p-2 rounded-lg flex gap-2 items-center text-xs font-light text-error/70 bg-primary-content"
+                >
+                  <NoSymbolIcon class="size-3" />
+                  <div>
+                    <span class="font-bold">Stop </span>email notifications for
+                    news about the stocks in your watchlist.
+                  </div>
+                </li>
+                <li
+                  class="p-2 rounded-lg flex gap-2 items-center text-xs font-light text-error/70 bg-primary-content"
+                >
+                  <NoSymbolIcon class="size-3" />
+                  <div>
+                    Permanently
+                    <span class="font-bold">remove</span>
+                    your access to stock market data.
+                  </div>
+                </li>
+                <li
+                  class="p-2 rounded-lg flex gap-2 items-center text-xs font-light text-error/70 bg-primary-content"
+                >
+                  <NoSymbolIcon class="size-3" />
+                  <div>
+                    <span class="font-bold">Delete</span>
+                    your account and all associated data.
+                  </div>
+                </li>
+              </ul>
+              <div class="mt-8 mb-2 w-full">
+                <div class="w-full">
+                  <div class="flex gap-4 justify-between items-center">
+                    <button
+                      class="btn px-8 bg-error rounded-md shadow-none border-none transition duration-300 ease-in-out z-10 hover:brightness-125"
+                    >
+                      <span class="text-error-content">Delete</span>
+                    </button>
+                    <button
+                      class="btn px-8 bg-neutral-content rounded-md shadow-none border-none transition duration-300 ease-in-out z-10 hover:brightness-125"
+                      @click="closeDialog"
+                    >
+                      <span class="text-error-content">Cancel</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </dialog>
   </div>
 </template>
