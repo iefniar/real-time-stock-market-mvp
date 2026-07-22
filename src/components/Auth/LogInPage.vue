@@ -1,84 +1,88 @@
 <template>
-  <div class="absolute inset-0 bg-primary-content dark:bg-gray-950">
-    <!-- diagonal pattern -->
-    <div
-      class="absolute inset-0 opacity-[0.07] dark:opacity-[0.05]"
-      :style="patternStyle"
-    ></div>
+  <div>
+    <div class="absolute inset-0 bg-primary-content dark:bg-gray-950">
+      <!-- diagonal pattern -->
+      <div
+        class="absolute inset-0 opacity-[0.07] dark:opacity-[0.05]"
+        :style="patternStyle"
+      ></div>
 
-    <!-- gradient overlay -->
-    <div
-      class="absolute inset-0 bg-linear-to-br from-primary-content via-white/0 to-bg-gray-950 dark:from-gray-950 dark:via-gray-950/0 dark:to-gray-950"
-    ></div>
-  </div>
+      <!-- gradient overlay -->
+      <div
+        class="absolute inset-0 bg-linear-to-br from-primary-content via-white/0 to-bg-gray-950 dark:from-gray-950 dark:via-gray-950/0 dark:to-gray-950"
+      ></div>
+    </div>
 
-  <div class="relative">
-    <form
-      @submit.prevent="onSubmit"
-      class="relative space-y-5 max-w-sm mx-auto flex flex-col z-10"
-    >
-      <div class="flex flex-col items-center">
-        <img
-          src="@/assets/soul-toucan-no-bg.png"
-          alt="login image"
-          class="w-64 h-64 object-cover hover:drop-shadow-lg/50 drop-shadow-primary transition delay-50 duration-300 ease-in-out"
-        />
-        <h1 class="font-light text-secondary text-2xl young-serif-regular">
-          Welcome Back
-        </h1>
-      </div>
-      <!-- Email -->
-      <div>
-        <input
-          v-model="email"
-          type="email"
-          placeholder="Email"
-          class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
-        />
-        <p class="text-error text-sm pt-1">{{ errors.email }}</p>
-      </div>
-      <!-- Password -->
-      <div>
-        <input
-          v-model="password"
-          type="password"
-          placeholder="Password"
-          class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
-        />
-        <p class="text-error text-sm pt-1">{{ errors.password }}</p>
-      </div>
-      <!-- Submit -->
-      <button
-        class="btn bg-primary w-full shadow-none border-none drop-shadow-lg/50 drop-shadow-primary transition duration-300 ease-in-out z-10 hover:brightness-125"
-        :disabled="isSubmitting"
+    <div class="relative">
+      <form
+        @submit.prevent="onSubmit"
+        class="relative space-y-5 max-w-sm mx-auto flex flex-col z-10"
       >
-        <span v-if="!isSubmitting" class="text-accent font-normal">Log In</span>
-        <span
-          v-else
-          class="flex items-center justify-center gap-2 text-accent font-normal"
+        <div class="flex flex-col items-center">
+          <img
+            src="@/assets/soul-toucan-no-bg.png"
+            alt="login image"
+            class="w-64 h-64 object-cover hover:drop-shadow-lg/50 drop-shadow-primary transition delay-50 duration-300 ease-in-out"
+          />
+          <h1 class="font-light text-secondary text-2xl young-serif-regular">
+            Welcome Back
+          </h1>
+        </div>
+        <!-- Email -->
+        <div>
+          <input
+            v-model="email"
+            type="email"
+            placeholder="Email"
+            class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
+          />
+          <p class="text-error text-sm pt-1">{{ errors.email }}</p>
+        </div>
+        <!-- Password -->
+        <div>
+          <input
+            v-model="password"
+            type="password"
+            placeholder="Password"
+            class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
+          />
+          <p class="text-error text-sm pt-1">{{ errors.password }}</p>
+        </div>
+        <!-- Submit -->
+        <button
+          class="btn bg-primary w-full shadow-none border-none drop-shadow-lg/50 drop-shadow-primary transition duration-300 ease-in-out z-10 hover:brightness-125"
+          :disabled="isSubmitting"
         >
-          <span class="loading loading-spinner loading-sm"></span>
-          Logging in...
-        </span>
-      </button>
-      <div class="flex flex-col items-center pt-4">
-        <p class="text-sm text-secondary font-light flex gap-2 items-center">
-          Don't have an account?
-          <router-link
-            class="text-accent transition delay-150 duration-300 ease-in-out hover:text-primary"
-            :to="{ name: 'signUp' }"
+          <span v-if="!isSubmitting" class="text-accent font-normal"
+            >Log In</span
           >
-            Sign Up
-          </router-link>
-        </p>
-      </div>
-    </form>
-    <AlertMessage
-      v-if="showError"
-      type="error"
-      :message="errorMessage"
-      @close="showError = false"
-    />
+          <span
+            v-else
+            class="flex items-center justify-center gap-2 text-accent font-normal"
+          >
+            <span class="loading loading-spinner loading-sm"></span>
+            Logging in...
+          </span>
+        </button>
+        <div class="flex flex-col items-center pt-4">
+          <p class="text-sm text-secondary font-light flex gap-2 items-center">
+            Don't have an account?
+            <router-link
+              class="text-accent transition delay-150 duration-300 ease-in-out hover:text-primary"
+              :to="{ name: 'signUp' }"
+            >
+              Sign Up
+            </router-link>
+          </p>
+        </div>
+      </form>
+      <AlertMessage
+        v-if="showError"
+        type="error"
+        :message="errorMessage"
+        @close="showError = false"
+      />
+    </div>
   </div>
 </template>
 
