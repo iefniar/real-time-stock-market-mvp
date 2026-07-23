@@ -275,12 +275,14 @@ const onSubmit = handleSubmit(
         throw new Error(`Request failed: ${data.error}`)
       }
 
-      console.log('Submitted:', data)
-
       resetForm()
 
       await router.replace({
-        name: 'home'
+        name: 'checkEmail',
+        query: {
+          email,
+          name: fullName
+        }
       })
     } catch (error) {
       errorMessage.value =
