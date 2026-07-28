@@ -81,8 +81,8 @@ const iconPath = computed(() => {
 .alert-container {
   position: fixed;
   top: calc(var(--top-space-height) + 1rem);
-  left: calc(var(--left-space-width) + 20%);
-  right: 20%;
+  left: calc(var(--left-space-width) + 18%);
+  right: 18%;
   z-index: 200;
   max-width: 600px;
   margin-inline: auto;

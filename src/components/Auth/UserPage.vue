@@ -155,9 +155,9 @@ onMounted(async () => {
         </div>
       </div>
       <!-- Modal -->
-      <dialog class="modal z-10" :class="{ 'modal-open': open }">
+      <dialog class="modal z-20" :class="{ 'modal-open': open }">
         <div
-          class="modal-box rounded-xl bg-secondary-content relative max-h-[80dvh] p-0 border-neutral border inset-shadow-sm inset-shadow-neutral"
+          class="modal-box rounded-xl bg-secondary-content relative max-h-[80dvh] pb-10 px-5 sm:p-0 border-neutral border inset-shadow-sm inset-shadow-neutral"
         >
           <div class="sticky top-0 z-10 bg-secondary-content py-6 pl-4 pr-2">
             <div class="flex flex-col w-full items-center">

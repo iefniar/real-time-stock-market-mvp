@@ -86,3 +86,8 @@ export type StockWithData = {
   marketCap?: string
   peRatio?: string
 }
+
+export type ResetPasswordFormData = {
+  password: string
+  confirmPassword: string
+}

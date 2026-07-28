@@ -48,6 +48,14 @@
           />
           <p class="text-error text-sm pt-1">{{ errors.password }}</p>
         </div>
+        <div>
+          <RouterLink
+            :to="{ name: 'forgotPassword' }"
+            class="link link-hover text-sm"
+          >
+            Forgot your password?
+          </RouterLink>
+        </div>
         <!-- Submit -->
         <button
           class="btn bg-primary w-full shadow-none border-none drop-shadow-lg/50 drop-shadow-primary transition duration-300 ease-in-out z-10 hover:brightness-125"
@@ -67,12 +75,12 @@
         <div class="flex flex-col items-center pt-4">
           <p class="text-sm text-secondary font-light flex gap-2 items-center">
             Don't have an account?
-            <router-link
+            <RouterLink
               class="text-accent transition delay-150 duration-300 ease-in-out hover:text-primary"
               :to="{ name: 'signUp' }"
             >
               Sign Up
-            </router-link>
+            </RouterLink>
           </p>
         </div>
       </form>

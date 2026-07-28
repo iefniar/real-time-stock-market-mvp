@@ -6,6 +6,8 @@ import StockDetails from '@/components/Stocks/StockDetails.vue'
 import Watchlist from '@/components/Stocks/Watchlist.vue'
 import CheckEmailPage from '@/components/Auth/CheckEmailPage.vue'
 import EmailVerifiedPage from '@/components/Auth/EmailVerifiedPage.vue'
+import ForgotPasswordPage from '@/components/Auth/ForgotPasswordPage.vue'
+import ResetPasswordPage from '@/components/Auth/ResetPasswordPage.vue'
 import NotFoundPage from '@/components/NotFoundPage.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { authClient } from '@/lib/auth-client'
@@ -24,7 +26,21 @@ const router = createRouter({
     { path: '/sign-up', component: SignUpPage, name: 'signUp' },
     { path: '/log-in', component: LogInPage, name: 'logIn' },
     { path: '/check-email', component: CheckEmailPage, name: 'checkEmail' },
-    { path: '/email-verified', component: EmailVerifiedPage, name: 'emailVerified' },
+    {
+      path: '/email-verified',
+      component: EmailVerifiedPage,
+      name: 'emailVerified'
+    },
+    {
+      path: '/forgot-password',
+      component: ForgotPasswordPage,
+      name: 'forgotPassword'
+    },
+    {
+      path: '/reset-password',
+      component: ResetPasswordPage,
+      name: 'resetPassword'
+    },
     {
       path: '/user',
       component: UserPage,
