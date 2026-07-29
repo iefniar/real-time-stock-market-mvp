@@ -159,16 +159,16 @@ onMounted(async () => {
         <div
           class="modal-box rounded-xl bg-secondary-content relative max-h-[80dvh] pb-10 px-5 sm:p-0 border-neutral border inset-shadow-sm inset-shadow-neutral"
         >
-          <div class="sticky top-0 z-10 bg-secondary-content py-6 pl-4 pr-2">
+          <div class="sticky top-0 z-10 bg-secondary-content py-6 px-2">
             <div class="flex flex-col w-full items-center">
               <div class="flex flex-col items-start gap-1">
-                <div class="text-lg font-light text-secondary">
+                <div class="text-lg font-bold text-primary">
                   Are you sure you want to delete your account?
                 </div>
                 <div class="text-xs font-bold text-error/90">
                   This action is permanent and cannot be undone.
                 </div>
-                <div class="mt-8 text-md font-light text-secondary">
+                <div class="mt-8 text-md font-medium text-primary">
                   Deleting your account will:
                 </div>
                 <ul class="flex flex-col gap-2 text-secondary/80">
@@ -203,7 +203,7 @@ onMounted(async () => {
                 </ul>
                 <div class="mt-8 flex flex-col gap-1 w-full">
                   <label
-                    class="text-md font-light text-secondary"
+                    class="text-md font-medium text-primary"
                     for="password"
                     >To proceed, please enter your password:</label
                   >
@@ -212,7 +212,7 @@ onMounted(async () => {
                     id="password"
                     type="password"
                     placeholder="Password"
-                    class="input border-neutral shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
+                    class="input border-primary/55 shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
                   />
                 </div>
                 <div class="mt-8 mb-2 w-full">
@@ -225,10 +225,10 @@ onMounted(async () => {
                         <span class="text-error-content">Delete</span>
                       </button>
                       <button
-                        class="btn px-8 bg-neutral-content rounded-md shadow-none border-none transition duration-300 ease-in-out z-10 hover:brightness-125"
+                        class="btn px-8 bg-primary-content rounded-md shadow-none border-none transition duration-300 ease-in-out z-10 hover:brightness-125"
                         @click="closeDialog"
                       >
-                        <span class="text-error-content">Cancel</span>
+                        <span class="text-primary">Cancel</span>
                       </button>
                     </div>
                   </div>

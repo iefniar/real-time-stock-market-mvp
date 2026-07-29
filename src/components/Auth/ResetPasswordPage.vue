@@ -94,14 +94,11 @@ onMounted(() => {
 
 <template>
   <div class="max-w-md mx-auto mt-20">
-    <h1 class="text-3xl font-bold mb-2">Create a new password</h1>
-
-    <p class="text-gray-500 mb-8">Type a new password for your account.</p>
-
+    <h1 class="text-3xl font-bold mb-2 text-secondary">Create a new password</h1>
+    <p class="text-secondary/75 mb-8">Type a new password for your account.</p>
     <div v-if="success" class="alert alert-success">
       Password updated successfully. Redirecting to login...
     </div>
-
     <form v-else class="space-y-4" @submit.prevent="resetPassword">
       <div>
         <input
@@ -113,7 +110,6 @@ onMounted(() => {
           :disabled="isSubmitting"
           class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
         />
-
         <p class="text-error text-sm pt-1">
           {{ errors.password }}
         </p>
@@ -128,20 +124,17 @@ onMounted(() => {
           :disabled="isSubmitting"
           class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
         />
-
         <p class="text-error text-sm pt-1">
           {{ errors.confirmPassword }}
         </p>
       </div>
-
       <button
         type="submit"
-        class="btn btn-primary w-full"
+        class="btn bg-primary w-full text-accent font-normal shadow-none border-none drop-shadow-lg/50 drop-shadow-primary transition duration-300 ease-in-out z-10 hover:brightness-125"
         :disabled="isSubmitting"
       >
         {{ isSubmitting ? 'Updating...' : 'Reset password' }}
       </button>
-
       <div v-if="showError" class="alert alert-error">
         {{ errorMessage }}
       </div>

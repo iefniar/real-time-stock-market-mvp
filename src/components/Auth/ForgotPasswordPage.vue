@@ -46,30 +46,25 @@ async function forgotPassword () {
 
 <template>
   <div class="max-w-md mx-auto mt-20">
-    <h1 class="text-3xl font-bold mb-2">Forgot password</h1>
-
-    <p class="mb-8 text-gray-500">
+    <h1 class="text-3xl font-bold mb-2 text-secondary">Forgot password</h1>
+    <p class="text-secondary/75 mb-8">
       Enter your email address and we'll send you a link to reset your password.
     </p>
-
     <div v-if="success" class="alert alert-success">
       If an account exists with that email, we've sent you a password reset
       link.
     </div>
-
     <form v-else @submit.prevent="forgotPassword" class="space-y-4">
       <input
         v-model="email"
         type="email"
         required
         placeholder="Email address"
-        class="input input-bordered w-full"
+        class="input shadow-none bg-secondary-content text-primary w-full focus-within:outline-0 focus-within:border-primary"
       />
-
-      <button type="submit" class="btn btn-primary w-full" :disabled="loading">
+      <button type="submit" class="btn bg-primary w-full text-accent font-normal shadow-none border-none drop-shadow-lg/50 drop-shadow-primary transition duration-300 ease-in-out z-10 hover:brightness-125" :disabled="loading">
         {{ loading ? 'Sending...' : 'Send reset link' }}
       </button>
-
       <div v-if="showError" class="alert alert-error">
         {{ errorMessage }}
       </div>
