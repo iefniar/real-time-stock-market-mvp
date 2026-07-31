@@ -8,6 +8,7 @@ import CheckEmailPage from '@/components/Auth/CheckEmailPage.vue'
 import EmailVerifiedPage from '@/components/Auth/EmailVerifiedPage.vue'
 import ForgotPasswordPage from '@/components/Auth/ForgotPasswordPage.vue'
 import ResetPasswordPage from '@/components/Auth/ResetPasswordPage.vue'
+import DeleteAccountPage from '@/components/Auth/DeleteAccountPage.vue'
 import NotFoundPage from '@/components/NotFoundPage.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { authClient } from '@/lib/auth-client'
@@ -40,6 +41,11 @@ const router = createRouter({
       path: '/reset-password',
       component: ResetPasswordPage,
       name: 'resetPassword'
+    },
+    {
+      path: '/delete-account',
+      component: DeleteAccountPage,
+      name: 'deleteAccount'
     },
     {
       path: '/user',

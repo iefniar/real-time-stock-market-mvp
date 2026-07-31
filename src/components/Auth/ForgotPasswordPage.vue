@@ -50,7 +50,7 @@ async function forgotPassword () {
     <p class="text-secondary/75 mb-8">
       Enter your email address and we'll send you a link to reset your password.
     </p>
-    <div v-if="success" class="alert alert-success">
+    <div v-if="success" class="alert alert-success font-medium">
       If an account exists with that email, we've sent you a password reset
       link.
     </div>

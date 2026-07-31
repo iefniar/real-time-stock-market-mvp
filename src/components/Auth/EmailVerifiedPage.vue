@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { FireIcon } from '@heroicons/vue/24/solid'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
+import { useRoute, useRouter } from 'vue-router'
+import { computed } from 'vue'
+import successImage from '@/assets/soul-chatgpt-bird-wings-open-no-bg.png'
+import errorImage from '@/assets/soul-chatgpt-bird-wings-crossed-no-bg.png'
 
 const patternStyle = {
   backgroundImage: `
@@ -28,11 +29,57 @@ const patternStyle = {
   backgroundSize: '42.4px 42.4px'
 }
 
+const router = useRouter()
+const route = useRoute()
+const error = computed(() => route.query.error)
+const success = computed(() => !error.value)
+
+const imgSource = computed(() => {
+  return success.value ? successImage : errorImage
+})
+
+const title = computed(() => {
+  switch (error.value) {
+    case 'USER_NOT_FOUND':
+      return 'Account not found'
+
+    case 'INVALID_TOKEN':
+      return 'Invalid verification link'
+
+    case 'TOKEN_EXPIRED':
+      return 'Verification link expired'
+
+    default:
+      return 'Success!'
+  }
+})
+
+const message = computed(() => {
+  switch (error.value) {
+    case 'USER_NOT_FOUND':
+      return 'This account no longer exists.'
+
+    case 'INVALID_TOKEN':
+      return 'This verification link is invalid.'
+
+    case 'TOKEN_EXPIRED':
+      return 'This verification link has expired.'
+
+    default:
+      return 'Email verified'
+  }
+})
+
+const buttonText = computed(() => {
+  return success.value ? 'Go to Login Page' : 'Go to Home Page'
+})
+
 const handleClick = () => {
   router.push({
-    name: 'logIn'
+    name: success.value ? 'logIn' : 'home'
   })
 }
+
 </script>
 
 <template>
@@ -51,7 +98,7 @@ const handleClick = () => {
     <div class="relative">
       <div class="flex flex-col items-center text-secondary/75">
         <img
-          src="@/assets/soul-chatgpt-bird-wings-open-no-bg.png"
+          :src="imgSource"
           alt="login image"
           class="w-80 h-80 object-cover hover:drop-shadow-lg/50 drop-shadow-primary transition delay-50 duration-300 ease-in-out"
         />
@@ -59,15 +106,15 @@ const handleClick = () => {
           class="flex gap-1 items-center text-primary text-2xl young-serif-regular hover:drop-shadow-lg/50 drop-shadow-primary transition delay-50 duration-300 ease-in-out"
         >
           <FireIcon class="size-10" />
-          Success!
+          {{ title }}
         </h1>
-        <p class="text-xl text-secondary mt-4">Email verified</p>
+        <p class="text-xl text-secondary mt-4">{{ message }}</p>
         <div class="mt-8">
           <button
             class="btn bg-primary w-full shadow-none border-none drop-shadow-lg/50 drop-shadow-primary transition duration-300 ease-in-out z-10 hover:brightness-125"
             @click="handleClick"
           >
-            <span class="text-accent font-normal">Go to Login Page</span>
+            <span class="text-accent font-normal">{{ buttonText }}</span>
           </button>
         </div>
       </div>

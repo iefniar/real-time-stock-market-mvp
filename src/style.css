@@ -23,8 +23,8 @@
   --color-neutral-content: rgb(69, 69, 69);
   --color-info: rgb(8, 152, 94); /* green */
   --color-info-content: rgb(235, 249, 238); /* background for green */
-  --color-success: oklch(65% 0.25 140);
-  --color-success-content: oklch(98% 0.01 140);
+  --color-success: var(--color-primary);
+  --color-success-content: var(--color-primary-content);
   --color-warning: oklch(80% 0.25 80);
   --color-warning-content: oklch(20% 0.05 80);
   --color-error: rgb(205, 31, 97); /* color for error text on form fields */

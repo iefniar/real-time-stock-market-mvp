@@ -51,7 +51,7 @@
         <div>
           <RouterLink
             :to="{ name: 'forgotPassword' }"
-            class="link link-hover text-sm"
+            class="link link-hover text-sm text-secondary"
           >
             Forgot your password?
           </RouterLink>
