@@ -69,7 +69,10 @@ const router = createRouter({
       name: 'stockDetails',
       props: route => ({
         symbol: String(route.params.symbol)
-      })
+      }),
+      meta: {
+        requiresAuth: true
+      }
     },
     { path: '/:catchAll(.*)', component: NotFoundPage, name: 'notFound' }
   ],
