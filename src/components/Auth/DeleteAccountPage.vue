@@ -44,7 +44,7 @@ async function deleteAccount () {
 
     setTimeout(() => {
       router.replace({
-        name: 'home'
+        name: 'logIn'
       })
     }, 3000)
   } catch (err) {

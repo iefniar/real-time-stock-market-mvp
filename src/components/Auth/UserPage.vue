@@ -20,6 +20,7 @@ const open = ref(false)
 const showError = ref(false)
 const errorMessage = ref('')
 const password = ref('')
+const success = ref(false)
 
 function closeDialog() {
   open.value = false
@@ -45,14 +46,18 @@ async function deleteAccountHandler() {
       throw new Error(result.error.message)
     }
 
+    success.value = true
+
     // Clear the password from memory
     password.value = ''
 
-    closeDialog()
+    setTimeout(() => {
+      closeDialog()
 
-    router.push({
-      name: 'logIn'
-    })
+      router.replace({
+        name: 'logIn'
+      })
+    }, 3000)
   } catch (error) {
     password.value = ''
 
@@ -168,6 +173,9 @@ onMounted(async () => {
                 <div class="text-xs font-bold text-error/90">
                   This action is permanent and cannot be undone.
                 </div>
+                <div v-if="success" class="alert alert-success mt-4">
+                  Your account has been deleted.
+                </div>
                 <div class="mt-8 text-md font-medium text-primary">
                   Deleting your account will:
                 </div>
@@ -202,9 +210,7 @@ onMounted(async () => {
                   </li>
                 </ul>
                 <div class="mt-8 flex flex-col gap-1 w-full">
-                  <label
-                    class="text-md font-medium text-primary"
-                    for="password"
+                  <label class="text-md font-medium text-primary" for="password"
                     >To proceed, please enter your password:</label
                   >
                   <input
