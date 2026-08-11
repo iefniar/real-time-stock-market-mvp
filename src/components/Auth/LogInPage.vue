@@ -119,7 +119,7 @@ const patternStyle = {
   backgroundSize: '42.4px 42.4px'
 }
 
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
@@ -177,6 +177,15 @@ const onSubmit = handleSubmit(async ({ email, password }: LogInFormData) => {
     errorMessage.value =
       error instanceof Error ? error.message : 'Failed to log in'
     showError.value = true
+  }
+})
+
+onMounted(async () => {
+  const session = await authClient.getSession()
+
+  if (session?.data?.user) {
+    router.push({ name: 'user' })
+    return
   }
 })
 </script>

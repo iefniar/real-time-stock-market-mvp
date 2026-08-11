@@ -179,11 +179,12 @@ const patternStyle = {
   backgroundSize: '42.4px 42.4px'
 }
 
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
+import { authClient } from '@/lib/auth-client'
 import {
   INVESTMENT_GOALS,
   RISK_TOLERANCE_OPTIONS,
@@ -292,6 +293,15 @@ const onSubmit = handleSubmit(
     }
   }
 )
+
+onMounted(async () => {
+  const session = await authClient.getSession()
+
+  if (session?.data?.user) {
+    router.push({ name: 'user' })
+    return
+  }
+})
 </script>
 
 <style scoped>
