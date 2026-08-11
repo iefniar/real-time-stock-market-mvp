@@ -170,7 +170,7 @@ const handleManageAccount = () => {
           <div class="text-sm">Dashboard</div>
         </router-link>
       </li>
-      <li class="flex-1">
+      <li v-if="isUserLoggedIn" class="flex-1">
         <SearchCommand :label="'Search'" />
       </li>
       <li class="flex-1">

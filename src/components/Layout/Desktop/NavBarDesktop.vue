@@ -18,6 +18,11 @@ const showError = ref(false)
 const errorMessage = ref('')
 const dropdownOpen = ref(false)
 const dropdownRef = ref<HTMLElement | null>(null)
+const { user, isUserLoggedIn } = useAuth()
+
+const userInitials = computed(() =>
+  user.value ? getInitials(user.value.name) : ''
+)
 
 function handleTriggerClick(event: MouseEvent) {
   event.stopPropagation()
@@ -38,12 +43,6 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
 })
-
-const { user, isUserLoggedIn } = useAuth()
-
-const userInitials = computed(() =>
-  user.value ? getInitials(user.value.name) : ''
-)
 
 const handleLogOut = async () => {
   dropdownOpen.value = false
@@ -107,7 +106,7 @@ const handleManageAccount = () => {
           Log In
         </router-link>
       </li>
-      <li>
+      <li v-if="isUserLoggedIn">
         <SearchCommand />
       </li>
       <li>
