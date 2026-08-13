@@ -29,10 +29,14 @@ const props = withDefaults(defineProps<Props>(), {
 // DOM ref
 const container = ref<HTMLDivElement | null>(null);
 
+let observer: IntersectionObserver | null = null
+let hasLoaded = false
+
 // Load widget
 const loadWidget = (): void => {
-  if (!container.value) return;
+  if (!container.value || hasLoaded) return;
 
+  hasLoaded = true
   container.value.innerHTML = "";
 
   const script = document.createElement("script");
@@ -63,17 +67,60 @@ const loadWidget = (): void => {
 
 };
 
-// lifecycle
-onMounted(loadWidget);
+const startObserving = (): void => {
+  if (!container.value) return
+
+  observer = new IntersectionObserver(
+    entries => {
+      const entry = entries[0]
+
+      if (entry?.isIntersecting) {
+        loadWidget()
+
+        observer?.disconnect()
+        observer = null
+      }
+    },
+    {
+      root: null,
+
+      // Start loading slightly before the widget actually enters the viewport.
+      rootMargin: '300px',
+
+      threshold: 0
+    }
+  )
+
+  observer.observe(container.value)
+}
+
+onMounted(() => {
+  startObserving()
+})
 
 watch(
-  () => [props.theme, props.dataSource, props.width, props.height] as const,
-  loadWidget
-);
+  () => [
+    props.theme,
+    props.dataSource,
+    props.width,
+    props.height
+  ] as const,
+  () => {
+    if (!hasLoaded) return
 
-onBeforeUnmount((): void => {
-  if (container.value) {
-    container.value.innerHTML = "";
+    // Recreate the widget if its props change.
+    hasLoaded = false
+
+    loadWidget()
   }
-});
+)
+
+onBeforeUnmount(() => {
+  observer?.disconnect()
+  observer = null
+
+  if (container.value) {
+    container.value.innerHTML = ''
+  }
+})
 </script>
