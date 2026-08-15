@@ -135,7 +135,7 @@ const errorMessage = ref('')
 // Schema
 const schema = toTypedSchema(
   z.object({
-    email: z.email('Invalid email'),
+    email: z.string().email('Invalid email'),
     password: z.string().trim().min(6, 'Minimum 6 characters')
   })
 )

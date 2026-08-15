@@ -202,7 +202,7 @@ const errorMessage = ref('')
 const schema = toTypedSchema(
   z.object({
     fullName: z.string().trim().min(1, 'Full name is required'),
-    email: z.email('Invalid email'),
+    email: z.string().email('Invalid email'),
     password: z.string().trim().min(6, 'Minimum 6 characters').max(128, 'Maximum 128 characters'),
     country: z.string().trim().min(2, 'Country is required'),
     investmentGoals: z.string().trim().min(1, 'Select a goal'),
