@@ -3,9 +3,9 @@
     class="relative overflow-x-auto p-4 rounded-lg border-neutral-content border bg-secondary-content"
   >
     <div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
-    <table class="table">
+    <table class="table relative">
       <div
-        class="w-full h-full opacity-[0.1] dark:opacity-[0.1]"
+        class="absolute inset-0 opacity-[0.1] dark:opacity-[0.1] z-0"
         :style="patternStyle"
       ></div>
       <thead>
@@ -20,7 +20,7 @@
           <th></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="z-10">
         <tr
           v-for="item in watchlist"
           :key="item.symbol"
