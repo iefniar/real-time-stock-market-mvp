@@ -72,7 +72,7 @@ onMounted(() => {
           <strong class="text-primary">{{ email }}</strong>
         </p>
         <p class="text-xs mt-4 text-center">Click the link in the email to activate your account</p>
-        <p class="text-xs mt-4 text-center">Don't see the email? Please check in your spam folder</p>
+        <p class="text-xs mt-2 text-center text-primary italic">Don't see the email? Please check in your spam folder</p>
       </div>
     </div>
   </div>
