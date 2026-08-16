@@ -164,25 +164,15 @@ const onSubmit = handleSubmit(async ({ email, password }: LogInFormData) => {
       password
     })
 
-    console.log('LOGIN RESULT:', result)
-
     if (result.error) {
       throw new Error(result.error.message)
     }
 
-    console.log('Login successful')
-
-    const session = await authClient.getSession()
-
-    console.log('SESSION AFTER LOGIN:', session)
-
     resetForm()
 
-    await router.push({
+    router.push({
       name: 'home'
     })
-
-    console.log('Navigation finished')
   } catch (error) {
     errorMessage.value =
       error instanceof Error ? error.message : 'Failed to log in'
