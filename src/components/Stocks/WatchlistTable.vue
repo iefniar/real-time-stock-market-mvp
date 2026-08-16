@@ -3,7 +3,7 @@
     class="relative overflow-x-auto p-4 rounded-lg border-neutral-content border bg-secondary-content"
   >
     <div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
-    <table class="table relative">
+    <table class="table relative z-10">
       <div
         class="absolute inset-0 opacity-[0.1] dark:opacity-[0.1]"
         :style="patternStyle"
@@ -24,7 +24,7 @@
         <tr
           v-for="item in watchlist"
           :key="item.symbol"
-          class="text-secondary cursor-pointer z-10 hover:bg-primary transition duration-300 ease-in-out"
+          class="text-secondary cursor-pointer hover:bg-primary transition duration-300 ease-in-out"
           @click="goToStock(item.symbol)"
         >
           <td>{{ item.company }}</td>
