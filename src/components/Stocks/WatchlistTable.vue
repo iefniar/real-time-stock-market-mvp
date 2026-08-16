@@ -63,7 +63,7 @@
                 </div>
               </div>
               <button
-                class="btn w-full shadow-none border-none transition duration-300 ease-in-out hover:drop-shadow-lg/50 hover:drop-shadow-neutral"
+                class="btn w-full min-w-40 shadow-none border-none transition duration-300 ease-in-out hover:drop-shadow-lg/50 hover:drop-shadow-neutral"
                 :class="
                   item.isNewsViaEmailActive
                     ? 'bg-accent text-primary-content'
