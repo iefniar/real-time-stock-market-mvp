@@ -24,7 +24,7 @@
         <tr
           v-for="item in watchlist"
           :key="item.symbol"
-          class="text-secondary cursor-pointer hover:bg-primary transition duration-300 ease-in-out"
+          class="text-secondary cursor-pointer z-10 hover:bg-primary transition duration-300 ease-in-out"
           @click="goToStock(item.symbol)"
         >
           <td>{{ item.company }}</td>
