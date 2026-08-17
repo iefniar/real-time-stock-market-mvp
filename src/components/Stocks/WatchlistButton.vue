@@ -24,7 +24,7 @@
   <button
     v-else
     :disabled="isDisabled"
-    class="btn shadow-none border-none transition duration-300 ease-in-out hover:brightness-150 disabled:cursor-not-allowed disabled:hover:brightness-100"
+    class="btn shadow-none border-none transition duration-300 ease-in-out hover:brightness-150 disabled:cursor-not-allowed disabled:btn-neutral disabled:hover:brightness-100"
     :class="isInWatchlist ? 'btn-error' : 'btn-primary'"
     @click.stop.prevent="toggleWatchlist"
   >
