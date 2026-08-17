@@ -1,14 +1,20 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import type { StockWithData, StockWithWatchlistStatus } from '@/types/global'
 
 export const useWatchlistStore = defineStore('watchlist', () => {
+  const MAX_WATCHLIST_STOCKS = 5
+
   const watchlist = ref<StockWithData[]>([])
 
   const popularStocks = ref<StockWithWatchlistStatus[]>([])
 
   const loading = ref(false)
+
+  const watchlistLimitReached = computed(() => {
+    return watchlist.value.length >= MAX_WATCHLIST_STOCKS
+  })
 
   async function loadWatchlist () {
     loading.value = true
@@ -76,9 +82,11 @@ export const useWatchlistStore = defineStore('watchlist', () => {
   }
 
   return {
+    MAX_WATCHLIST_STOCKS,
     watchlist,
     popularStocks,
     loading,
+    watchlistLimitReached,
     loadWatchlist,
     loadPopularStocks,
     updateStock,

@@ -2,9 +2,12 @@
   <!-- Icon version -->
   <button
     v-if="type === 'icon'"
-    :title="buttonTitle"
-    :aria-label="buttonTitle"
-    class="cursor-pointer transition duration-300 hover:text-accent"
+    :title="isDisabled ? 'Watchlist limit reached (5 stocks)' : buttonTitle"
+    :aria-label="
+      isDisabled ? 'Watchlist limit reached (5 stocks)' : buttonTitle
+    "
+    :disabled="isDisabled"
+    class="cursor-pointer transition duration-300 hover:text-accent disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:text-current"
     @click.stop.prevent="toggleWatchlist"
   >
     <TrashIcon
@@ -20,8 +23,9 @@
   <!-- Button version -->
   <button
     v-else
-    class="btn shadow-none border-none transition duration-300 ease-in-out hover:brightness-150"
-    :class="isInWatchlist ? 'btn-error' : 'btn-primary'"
+    :disabled="isDisabled"
+    class="btn shadow-none border-none transition duration-300 ease-in-out hover:brightness-150 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:brightness-100"
+    :class="isInWatchlist ? 'btn-neutral' : 'btn-primary'"
     @click.stop.prevent="toggleWatchlist"
   >
     <TrashIcon v-if="showTrashIcon && isInWatchlist" class="size-4" />
@@ -69,7 +73,16 @@ const buttonTitle = computed(() =>
 
 const watchlistStore = useWatchlistStore()
 
+const isDisabled = computed(
+  () => !props.isInWatchlist && watchlistStore.watchlistLimitReached
+)
+
 async function toggleWatchlist() {
+  // Prevent adding another stock when the limit is reached
+  if (!props.isInWatchlist && watchlistStore.watchlistLimitReached) {
+    return
+  }
+
   try {
     const response = await fetch(
       props.isInWatchlist
@@ -93,8 +106,10 @@ async function toggleWatchlist() {
       }
     )
 
+    const result = await response.json()
+
     if (!response.ok) {
-      throw new Error('Request failed')
+      throw new Error(result.error || 'Request failed')
     }
 
     const isAdded = !props.isInWatchlist
