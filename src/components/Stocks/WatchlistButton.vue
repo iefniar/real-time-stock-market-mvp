@@ -24,8 +24,8 @@
   <button
     v-else
     :disabled="isDisabled"
-    class="btn shadow-none border-none transition duration-300 ease-in-out hover:brightness-150 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:brightness-100"
-    :class="isInWatchlist ? 'btn-neutral' : 'btn-primary'"
+    class="btn shadow-none border-none transition duration-300 ease-in-out hover:brightness-150 disabled:cursor-not-allowed disabled:hover:brightness-100"
+    :class="isInWatchlist ? 'btn-error' : 'btn-primary'"
     @click.stop.prevent="toggleWatchlist"
   >
     <TrashIcon v-if="showTrashIcon && isInWatchlist" class="size-4" />
