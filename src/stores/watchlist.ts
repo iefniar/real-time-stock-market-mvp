@@ -35,9 +35,28 @@ export const useWatchlistStore = defineStore('watchlist', () => {
 
       const data = await response.json()
 
-      console.log('🟡 WATCHLIST RESPONSE:', data)
+      console.table(
+        data.map((stock: StockWithData) => ({
+          symbol: stock.symbol,
+          company: stock.company,
+          price: stock.priceFormatted,
+          change: stock.changeFormatted,
+          marketCap: stock.marketCap,
+          pe: stock.peRatio
+        }))
+      )
 
       watchlist.value = data
+
+      console.table(
+        watchlist.value.map(stock => ({
+          symbol: stock.symbol,
+          price: stock.priceFormatted,
+          change: stock.changeFormatted,
+          marketCap: stock.marketCap,
+          pe: stock.peRatio
+        }))
+      )
 
       console.log('🔵 WATCHLIST STATE AFTER UPDATE:', watchlist.value)
     } catch (error) {
