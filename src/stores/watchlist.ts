@@ -17,8 +17,6 @@ export const useWatchlistStore = defineStore('watchlist', () => {
   })
 
   async function loadWatchlist () {
-    console.log('🟢 loadWatchlist START')
-
     loading.value = true
 
     try {
@@ -35,39 +33,14 @@ export const useWatchlistStore = defineStore('watchlist', () => {
 
       const data = await response.json()
 
-      console.table(
-        data.map((stock: StockWithData) => ({
-          symbol: stock.symbol,
-          company: stock.company,
-          price: stock.priceFormatted,
-          change: stock.changeFormatted,
-          marketCap: stock.marketCap,
-          pe: stock.peRatio
-        }))
-      )
-
       watchlist.value = data
-
-      console.table(
-        watchlist.value.map(stock => ({
-          symbol: stock.symbol,
-          price: stock.priceFormatted,
-          change: stock.changeFormatted,
-          marketCap: stock.marketCap,
-          pe: stock.peRatio
-        }))
-      )
-
-      console.log('🔵 WATCHLIST STATE AFTER UPDATE:', watchlist.value)
     } catch (error) {
-      console.error('🔴 loadWatchlist ERROR:', error)
+      console.error('loadWatchlist ERROR:', error)
 
       watchlist.value = []
     }
 
     loading.value = false
-
-    console.log('🟣 loadWatchlist END')
   }
 
   async function loadPopularStocks () {
