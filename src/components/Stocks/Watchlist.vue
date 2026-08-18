@@ -48,6 +48,6 @@ function handleNewsEmailUpdated(symbol: string, isNewsViaEmailActive: boolean) {
 }
 
 onMounted(() => {
-  watchlistStore.refresh()
+  watchlistStore.loadWatchlist()
 })
 </script>
